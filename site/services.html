@@ -1,278 +1,535 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Услуги психолога: детская психология, терапия отношений, работа со стрессом, подростковая психология, личностный рост. Цены и описание.">
-  <meta property="og:title" content="Услуги — Психолог онлайн">
-  <title>Услуги — Психолог онлайн</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/pages/services.css">
-  <link rel="stylesheet" href="css/responsive.css">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="Услуги психолога: детская психология, терапия отношений, работа со стрессом, подростковая психология, личностный рост. Цены и описание."
+        />
+        <meta property="og:title" content="Услуги — Психолог онлайн" />
+        <meta
+            property="og:description"
+            content="Направления работы: детская психология, терапия отношений, стресс и тревожность, подростковая психология, личностный рост, кризисные состояния."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="/services.html" />
+        <meta property="og:locale" content="ru_RU" />
+        <link rel="canonical" href="/services.html" />
+        <link rel="icon" href="img/favicon.svg" type="image/svg+xml" />
+        <title>Услуги — Психолог онлайн</title>
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "Person",
+                "name": "Имя Фамилия",
+                "jobTitle": "Психолог",
+                "description": "Практикующий психолог. Онлайн-консультации для взрослых, пар и подростков.",
+                "url": "/services.html",
+                "sameAs": [
+                    "https://t.me/username",
+                    "https://wa.me/79001234567",
+                    "https://instagram.com/username",
+                    "https://vk.com/username"
+                ]
+            }
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="css/base.css" />
+        <link rel="stylesheet" href="css/components.css" />
+        <link rel="stylesheet" href="css/layout.css" />
+        <link rel="stylesheet" href="css/pages/services.css" />
+        <link rel="stylesheet" href="css/responsive.css" />
+    </head>
+    <body>
+        <header class="header">
+            <div class="container header__inner">
+                <a href="index.html" class="header__logo">Имя Фамилия</a>
+                <nav class="header__nav">
+                    <ul class="header__nav-list">
+                        <li>
+                            <a href="index.html" class="header__nav-link"
+                                >Главная</a
+                            >
+                        </li>
+                        <li>
+                            <a href="about.html" class="header__nav-link"
+                                >Обо мне</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="services.html"
+                                class="header__nav-link header__nav-link--active"
+                                >Услуги</a
+                            >
+                        </li>
+                        <li>
+                            <a href="how-it-works.html" class="header__nav-link"
+                                >Как проходит</a
+                            >
+                        </li>
+                        <li>
+                            <a href="blog.html" class="header__nav-link"
+                                >Блог</a
+                            >
+                        </li>
+                        <li>
+                            <a href="faq.html" class="header__nav-link">FAQ</a>
+                        </li>
+                        <li>
+                            <a href="contact.html" class="header__nav-link"
+                                >Контакты</a
+                            >
+                        </li>
+                    </ul>
+                </nav>
+                <a href="contact.html" class="btn btn--primary header__cta"
+                    >Записаться</a
+                >
+                <button class="burger" aria-label="Открыть меню">
+                    <span class="burger__line"></span
+                    ><span class="burger__line"></span
+                    ><span class="burger__line"></span>
+                </button>
+            </div>
+        </header>
 
-  <header class="header">
-    <div class="container header__inner">
-      <a href="index.html" class="header__logo">Имя Фамилия</a>
-      <nav class="header__nav">
-        <ul class="header__nav-list">
-          <li><a href="index.html" class="header__nav-link">Главная</a></li>
-          <li><a href="about.html" class="header__nav-link">Обо мне</a></li>
-          <li><a href="services.html" class="header__nav-link header__nav-link--active">Услуги</a></li>
-          <li><a href="how-it-works.html" class="header__nav-link">Как проходит</a></li>
-          <li><a href="blog.html" class="header__nav-link">Блог</a></li>
-          <li><a href="faq.html" class="header__nav-link">FAQ</a></li>
-          <li><a href="contact.html" class="header__nav-link">Контакты</a></li>
-        </ul>
-      </nav>
-      <a href="contact.html" class="btn btn--primary header__cta">Записаться</a>
-      <button class="burger" aria-label="Открыть меню">
-        <span class="burger__line"></span><span class="burger__line"></span><span class="burger__line"></span>
-      </button>
-    </div>
-  </header>
-
-  <div class="mobile-menu">
-    <ul class="mobile-menu__list">
-      <li><a href="index.html" class="mobile-menu__link">Главная</a></li>
-      <li><a href="about.html" class="mobile-menu__link">Обо мне</a></li>
-      <li><a href="services.html" class="mobile-menu__link">Услуги</a></li>
-      <li><a href="how-it-works.html" class="mobile-menu__link">Как проходит</a></li>
-      <li><a href="blog.html" class="mobile-menu__link">Блог</a></li>
-      <li><a href="faq.html" class="mobile-menu__link">FAQ</a></li>
-      <li><a href="contact.html" class="mobile-menu__link">Контакты</a></li>
-    </ul>
-    <a href="contact.html" class="btn btn--primary btn--full mobile-menu__cta">Записаться на консультацию</a>
-  </div>
-
-  <section class="page-hero">
-    <div class="container">
-      <div class="page-hero__center">
-        <span class="badge badge--green">Услуги</span>
-        <h1>Направления работы</h1>
-        <p>Выберите то, что откликается вашей ситуации. Если не уверены — напишите, и мы вместе определим формат.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--bg">
-    <div class="container">
-      <div class="services-grid">
-        <div class="service-detail-card">
-          <div class="service-detail-card__header">
-            <span class="service-detail-card__emoji">🧒</span>
-            <h3>Детская психология</h3>
-          </div>
-          <p class="service-detail-card__desc">
-            Работа с детьми от 4 лет и их родителями. Помогаю справиться с эмоциональными и поведенческими трудностями через игровую терапию и работу с семьёй.
-          </p>
-          <ul class="service-detail-card__list">
-            <li>Страхи и тревожность у детей</li>
-            <li>Агрессия и трудности в поведении</li>
-            <li>Адаптация к саду / школе</li>
-            <li>Проблемы в общении со сверстниками</li>
-            <li>Развод родителей и реакция ребёнка</li>
-          </ul>
-          <div class="service-detail-card__footer">
-            <span class="service-detail-card__price">от XXXX ₽ / 50 мин</span>
-            <a href="contact.html" class="btn btn--primary">Записаться</a>
-          </div>
+        <div class="mobile-menu">
+            <ul class="mobile-menu__list">
+                <li>
+                    <a href="index.html" class="mobile-menu__link">Главная</a>
+                </li>
+                <li>
+                    <a href="about.html" class="mobile-menu__link">Обо мне</a>
+                </li>
+                <li>
+                    <a href="services.html" class="mobile-menu__link">Услуги</a>
+                </li>
+                <li>
+                    <a href="how-it-works.html" class="mobile-menu__link"
+                        >Как проходит</a
+                    >
+                </li>
+                <li><a href="blog.html" class="mobile-menu__link">Блог</a></li>
+                <li><a href="faq.html" class="mobile-menu__link">FAQ</a></li>
+                <li>
+                    <a href="contact.html" class="mobile-menu__link"
+                        >Контакты</a
+                    >
+                </li>
+            </ul>
+            <a
+                href="contact.html"
+                class="btn btn--primary btn--full mobile-menu__cta"
+                >Записаться на консультацию</a
+            >
         </div>
 
-        <div class="service-detail-card">
-          <div class="service-detail-card__header">
-            <span class="service-detail-card__emoji">👫</span>
-            <h3>Терапия отношений</h3>
-          </div>
-          <p class="service-detail-card__desc">
-            Консультирование пар и семей. Помогаю партнёрам услышать друг друга, разрешить повторяющиеся конфликты и восстановить близость.
-          </p>
-          <ul class="service-detail-card__list">
-            <li>Частые конфликты и непонимание</li>
-            <li>Утрата близости и доверия</li>
-            <li>Сложности в коммуникации</li>
-            <li>Подготовка к совместной жизни</li>
-            <li>Переживание кризиса в отношениях</li>
-          </ul>
-          <div class="service-detail-card__footer">
-            <span class="service-detail-card__price">от XXXX ₽ / 80 мин</span>
-            <a href="contact.html" class="btn btn--primary">Записаться</a>
-          </div>
-        </div>
+        <section class="page-hero">
+            <div class="container">
+                <div class="page-hero__center">
+                    <span class="badge badge--green">Услуги</span>
+                    <h1>Направления работы</h1>
+                    <p>
+                        Выберите то, что откликается вашей ситуации. Если не
+                        уверены — напишите, и мы вместе определим формат.
+                    </p>
+                </div>
+            </div>
+        </section>
 
-        <div class="service-detail-card">
-          <div class="service-detail-card__header">
-            <span class="service-detail-card__emoji">🌿</span>
-            <h3>Стресс и тревожность</h3>
-          </div>
-          <p class="service-detail-card__desc">
-            Работа с хроническим стрессом, тревожностью, паническими атаками и эмоциональным выгоранием. Находим причины и учимся справляться.
-          </p>
-          <ul class="service-detail-card__list">
-            <li>Постоянная тревога и беспокойство</li>
-            <li>Панические атаки</li>
-            <li>Эмоциональное выгорание</li>
-            <li>Бессонница из-за стресса</li>
-            <li>Соматические симптомы</li>
-          </ul>
-          <div class="service-detail-card__footer">
-            <span class="service-detail-card__price">от XXXX ₽ / 50 мин</span>
-            <a href="contact.html" class="btn btn--primary">Записаться</a>
-          </div>
-        </div>
+        <section class="section section--bg">
+            <div class="container">
+                <div class="services-grid">
+                    <div class="service-detail-card">
+                        <div class="service-detail-card__header">
+                            <span class="service-detail-card__emoji">🧒</span>
+                            <h3>Детская психология</h3>
+                        </div>
+                        <p class="service-detail-card__desc">
+                            Работа с детьми от 4 лет и их родителями. Помогаю
+                            справиться с эмоциональными и поведенческими
+                            трудностями через игровую терапию и работу с семьёй.
+                        </p>
+                        <ul class="service-detail-card__list">
+                            <li>Страхи и тревожность у детей</li>
+                            <li>Агрессия и трудности в поведении</li>
+                            <li>Адаптация к саду / школе</li>
+                            <li>Проблемы в общении со сверстниками</li>
+                            <li>Развод родителей и реакция ребёнка</li>
+                        </ul>
+                        <div class="service-detail-card__footer">
+                            <span class="service-detail-card__price"
+                                >от XXXX ₽ / 50 мин</span
+                            >
+                            <a href="contact.html" class="btn btn--primary"
+                                >Записаться</a
+                            >
+                        </div>
+                    </div>
 
-        <div class="service-detail-card">
-          <div class="service-detail-card__header">
-            <span class="service-detail-card__emoji">🌱</span>
-            <h3>Подростковая психология</h3>
-          </div>
-          <p class="service-detail-card__desc">
-            Поддержка подростков 13–17 лет. Помогаюnavigate через сложности взросления, найти себя и научиться строить здоровые отношения.
-          </p>
-          <ul class="service-detail-card__list">
-            <li>Самооценка и уверенность</li>
-            <li>Отношения со сверстниками</li>
-            <li>Учебная мотивация</li>
-            <li>Кризис идентичности</li>
-            <li>Отношения с родителями</li>
-          </ul>
-          <div class="service-detail-card__footer">
-            <span class="service-detail-card__price">от XXXX ₽ / 50 мин</span>
-            <a href="contact.html" class="btn btn--primary">Записаться</a>
-          </div>
-        </div>
+                    <div class="service-detail-card">
+                        <div class="service-detail-card__header">
+                            <span class="service-detail-card__emoji">👫</span>
+                            <h3>Терапия отношений</h3>
+                        </div>
+                        <p class="service-detail-card__desc">
+                            Консультирование пар и семей. Помогаю партнёрам
+                            услышать друг друга, разрешить повторяющиеся
+                            конфликты и восстановить близость.
+                        </p>
+                        <ul class="service-detail-card__list">
+                            <li>Частые конфликты и непонимание</li>
+                            <li>Утрата близости и доверия</li>
+                            <li>Сложности в коммуникации</li>
+                            <li>Подготовка к совместной жизни</li>
+                            <li>Переживание кризиса в отношениях</li>
+                        </ul>
+                        <div class="service-detail-card__footer">
+                            <span class="service-detail-card__price"
+                                >от XXXX ₽ / 80 мин</span
+                            >
+                            <a href="contact.html" class="btn btn--primary"
+                                >Записаться</a
+                            >
+                        </div>
+                    </div>
 
-        <div class="service-detail-card">
-          <div class="service-detail-card__header">
-            <span class="service-detail-card__emoji">💪</span>
-            <h3>Личностный рост</h3>
-          </div>
-          <p class="service-detail-card__desc">
-            Работа с самооценкой, личными границами, жизненными целями. Помогаю лучше понимать себя и жить осознанно.
-          </p>
-          <ul class="service-detail-card__list">
-            <li>Низкая самооценка</li>
-            <li>Трудности с границами</li>
-            <li>Поиск жизненного пути</li>
-            <li>Синдром самозванца</li>
-            <li>Зависимость от чужого мнения</li>
-          </ul>
-          <div class="service-detail-card__footer">
-            <span class="service-detail-card__price">от XXXX ₽ / 50 мин</span>
-            <a href="contact.html" class="btn btn--primary">Записаться</a>
-          </div>
-        </div>
+                    <div class="service-detail-card">
+                        <div class="service-detail-card__header">
+                            <span class="service-detail-card__emoji">🌿</span>
+                            <h3>Стресс и тревожность</h3>
+                        </div>
+                        <p class="service-detail-card__desc">
+                            Работа с хроническим стрессом, тревожностью,
+                            паническими атаками и эмоциональным выгоранием.
+                            Находим причины и учимся справляться.
+                        </p>
+                        <ul class="service-detail-card__list">
+                            <li>Постоянная тревога и беспокойство</li>
+                            <li>Панические атаки</li>
+                            <li>Эмоциональное выгорание</li>
+                            <li>Бессонница из-за стресса</li>
+                            <li>Соматические симптомы</li>
+                        </ul>
+                        <div class="service-detail-card__footer">
+                            <span class="service-detail-card__price"
+                                >от XXXX ₽ / 50 мин</span
+                            >
+                            <a href="contact.html" class="btn btn--primary"
+                                >Записаться</a
+                            >
+                        </div>
+                    </div>
 
-        <div class="service-detail-card">
-          <div class="service-detail-card__header">
-            <span class="service-detail-card__emoji">🤝</span>
-            <h3>Кризисные состояния</h3>
-          </div>
-          <p class="service-detail-card__desc">
-            Поддержка в трудные периоды: потеря, развод, переезд, смена работы. Помогаю прожить кризис и найти опору.
-          </p>
-          <ul class="service-detail-card__list">
-            <li>Утрата и горевание</li>
-            <li>Развод и расставание</li>
-            <li>Жизненные перемены</li>
-            <li>Потеря смысла</li>
-            <li>Одиночество</li>
-          </ul>
-          <div class="service-detail-card__footer">
-            <span class="service-detail-card__price">от XXXX ₽ / 50 мин</span>
-            <a href="contact.html" class="btn btn--primary">Записаться</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+                    <div class="service-detail-card">
+                        <div class="service-detail-card__header">
+                            <span class="service-detail-card__emoji">🌱</span>
+                            <h3>Подростковая психология</h3>
+                        </div>
+                        <p class="service-detail-card__desc">
+                            Поддержка подростков 13–17 лет. Помогаюnavigate
+                            через сложности взросления, найти себя и научиться
+                            строить здоровые отношения.
+                        </p>
+                        <ul class="service-detail-card__list">
+                            <li>Самооценка и уверенность</li>
+                            <li>Отношения со сверстниками</li>
+                            <li>Учебная мотивация</li>
+                            <li>Кризис идентичности</li>
+                            <li>Отношения с родителями</li>
+                        </ul>
+                        <div class="service-detail-card__footer">
+                            <span class="service-detail-card__price"
+                                >от XXXX ₽ / 50 мин</span
+                            >
+                            <a href="contact.html" class="btn btn--primary"
+                                >Записаться</a
+                            >
+                        </div>
+                    </div>
 
-  <section class="section">
-    <div class="container">
-      <div class="section__header">
-        <h2 class="section__title">Как выбрать направление?</h2>
-        <p class="section__subtitle">Не обязательно точно знать, что вам нужно. На первой встрече мы вместе определим формат работы.</p>
-      </div>
-      <div class="grid grid--3">
-        <div class="card card--flat text-center">
-          <span style="font-size: 2rem;">💬</span>
-          <h4>Напишите мне</h4>
-          <p style="font-size: var(--text-sm); color: var(--color-text-secondary);">Опишите кратко, что вас беспокоит — я подскажу подходящий формат</p>
-        </div>
-        <div class="card card--flat text-center">
-          <span style="font-size: 2rem;">🎯</span>
-          <h4>Первая встреча</h4>
-          <p style="font-size: var(--text-sm); color: var(--color-text-secondary);">Знакомимся, обсуждаем запрос и определяем план работы</p>
-        </div>
-        <div class="card card--flat text-center">
-          <span style="font-size: 2rem;">🔄</span>
-          <h4>Гибкий формат</h4>
-          <p style="font-size: var(--text-sm); color: var(--color-text-secondary);">При необходимости направление работы может корректироваться</p>
-        </div>
-      </div>
-    </div>
-  </section>
+                    <div class="service-detail-card">
+                        <div class="service-detail-card__header">
+                            <span class="service-detail-card__emoji">💪</span>
+                            <h3>Личностный рост</h3>
+                        </div>
+                        <p class="service-detail-card__desc">
+                            Работа с самооценкой, личными границами, жизненными
+                            целями. Помогаю лучше понимать себя и жить
+                            осознанно.
+                        </p>
+                        <ul class="service-detail-card__list">
+                            <li>Низкая самооценка</li>
+                            <li>Трудности с границами</li>
+                            <li>Поиск жизненного пути</li>
+                            <li>Синдром самозванца</li>
+                            <li>Зависимость от чужого мнения</li>
+                        </ul>
+                        <div class="service-detail-card__footer">
+                            <span class="service-detail-card__price"
+                                >от XXXX ₽ / 50 мин</span
+                            >
+                            <a href="contact.html" class="btn btn--primary"
+                                >Записаться</a
+                            >
+                        </div>
+                    </div>
 
-  <section class="section" style="background-color: var(--color-accent-green); color: #FFFFFF;">
-    <div class="container text-center">
-      <h2 class="section__title" style="color: #FFFFFF;">Запишитесь на консультацию</h2>
-      <p class="section__subtitle" style="color: rgba(255,255,255,0.85); max-width: 560px; margin: 0 auto var(--space-xl);">
-        Напишите мне в удобный мессенджер — и мы подберём время для первой встречи
-      </p>
-      <div class="messenger-links" style="margin-bottom: var(--space-xl);">
-        <a href="https://t.me/username" class="messenger-link messenger-link--telegram" target="_blank" rel="noopener">Telegram</a>
-        <a href="https://wa.me/79001234567" class="messenger-link messenger-link--whatsapp" target="_blank" rel="noopener">WhatsApp</a>
-        <a href="https://instagram.com/username" class="messenger-link messenger-link--instagram" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://vk.com/username" class="messenger-link messenger-link--vk" target="_blank" rel="noopener">VK</a>
-      </div>
-      <a href="contact.html" class="btn" style="background-color: #FFFFFF; color: var(--color-accent-green);">Все способы связи</a>
-    </div>
-  </section>
+                    <div class="service-detail-card">
+                        <div class="service-detail-card__header">
+                            <span class="service-detail-card__emoji">🤝</span>
+                            <h3>Кризисные состояния</h3>
+                        </div>
+                        <p class="service-detail-card__desc">
+                            Поддержка в трудные периоды: потеря, развод,
+                            переезд, смена работы. Помогаю прожить кризис и
+                            найти опору.
+                        </p>
+                        <ul class="service-detail-card__list">
+                            <li>Утрата и горевание</li>
+                            <li>Развод и расставание</li>
+                            <li>Жизненные перемены</li>
+                            <li>Потеря смысла</li>
+                            <li>Одиночество</li>
+                        </ul>
+                        <div class="service-detail-card__footer">
+                            <span class="service-detail-card__price"
+                                >от XXXX ₽ / 50 мин</span
+                            >
+                            <a href="contact.html" class="btn btn--primary"
+                                >Записаться</a
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__inner">
-        <div class="footer__brand">
-          <div class="footer__logo">Имя Фамилия</div>
-          <p>Практикующий психолог. Онлайн-консультации для взрослых, пар и подростков.</p>
-        </div>
-        <div>
-          <h4 class="footer__title">Навигация</h4>
-          <ul class="footer__list">
-            <li><a href="index.html" class="footer__link">Главная</a></li>
-            <li><a href="about.html" class="footer__link">Обо мне</a></li>
-            <li><a href="services.html" class="footer__link">Услуги</a></li>
-            <li><a href="how-it-works.html" class="footer__link">Как проходит</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="footer__title">Информация</h4>
-          <ul class="footer__list">
-            <li><a href="blog.html" class="footer__link">Блог</a></li>
-            <li><a href="faq.html" class="footer__link">FAQ</a></li>
-            <li><a href="contact.html" class="footer__link">Контакты</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="footer__title">Связаться</h4>
-          <ul class="footer__list">
-            <li><a href="https://t.me/username" class="footer__link" target="_blank" rel="noopener">Telegram</a></li>
-            <li><a href="https://wa.me/79001234567" class="footer__link" target="_blank" rel="noopener">WhatsApp</a></li>
-            <li><a href="https://instagram.com/username" class="footer__link" target="_blank" rel="noopener">Instagram</a></li>
-            <li><a href="https://vk.com/username" class="footer__link" target="_blank" rel="noopener">VK</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer__bottom"><p>&copy; 2025 Имя Фамилия. Все права защищены.</p></div>
-    </div>
-  </footer>
+        <section class="section">
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="section__title">Как выбрать направление?</h2>
+                    <p class="section__subtitle">
+                        Не обязательно точно знать, что вам нужно. На первой
+                        встрече мы вместе определим формат работы.
+                    </p>
+                </div>
+                <div class="grid grid--3">
+                    <div class="card card--flat text-center">
+                        <span style="font-size: 2rem">💬</span>
+                        <h3>Напишите мне</h3>
+                        <p
+                            style="
+                                font-size: var(--text-sm);
+                                color: var(--color-text-secondary);
+                            "
+                        >
+                            Опишите кратко, что вас беспокоит — я подскажу
+                            подходящий формат
+                        </p>
+                    </div>
+                    <div class="card card--flat text-center">
+                        <span style="font-size: 2rem">🎯</span>
+                        <h3>Первая встреча</h3>
+                        <p
+                            style="
+                                font-size: var(--text-sm);
+                                color: var(--color-text-secondary);
+                            "
+                        >
+                            Знакомимся, обсуждаем запрос и определяем план
+                            работы
+                        </p>
+                    </div>
+                    <div class="card card--flat text-center">
+                        <span style="font-size: 2rem">🔄</span>
+                        <h3>Гибкий формат</h3>
+                        <p
+                            style="
+                                font-size: var(--text-sm);
+                                color: var(--color-text-secondary);
+                            "
+                        >
+                            При необходимости направление работы может
+                            корректироваться
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <script src="js/main.js"></script>
-</body>
+        <section
+            class="section"
+            style="background-color: var(--color-accent-green); color: #ffffff"
+        >
+            <div class="container text-center">
+                <h2 class="section__title" style="color: #ffffff">
+                    Запишитесь на консультацию
+                </h2>
+                <p
+                    class="section__subtitle"
+                    style="
+                        color: rgba(255, 255, 255, 0.85);
+                        max-width: 560px;
+                        margin: 0 auto var(--space-xl);
+                    "
+                >
+                    Напишите мне в удобный мессенджер — и мы подберём время для
+                    первой встречи
+                </p>
+                <div
+                    class="messenger-links"
+                    style="margin-bottom: var(--space-xl)"
+                >
+                    <a
+                        href="https://t.me/username"
+                        class="messenger-link messenger-link--telegram"
+                        target="_blank"
+                        rel="noopener"
+                        >Telegram</a
+                    >
+                    <a
+                        href="https://wa.me/79001234567"
+                        class="messenger-link messenger-link--whatsapp"
+                        target="_blank"
+                        rel="noopener"
+                        >WhatsApp</a
+                    >
+                    <a
+                        href="https://instagram.com/username"
+                        class="messenger-link messenger-link--instagram"
+                        target="_blank"
+                        rel="noopener"
+                        >Instagram</a
+                    >
+                    <a
+                        href="https://vk.com/username"
+                        class="messenger-link messenger-link--vk"
+                        target="_blank"
+                        rel="noopener"
+                        >VK</a
+                    >
+                </div>
+                <a
+                    href="contact.html"
+                    class="btn"
+                    style="
+                        background-color: #ffffff;
+                        color: var(--color-accent-green);
+                    "
+                    >Все способы связи</a
+                >
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer__inner">
+                    <div class="footer__brand">
+                        <div class="footer__logo">Имя Фамилия</div>
+                        <p>
+                            Практикующий психолог. Онлайн-консультации для
+                            взрослых, пар и подростков.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="footer__title">Навигация</h4>
+                        <ul class="footer__list">
+                            <li>
+                                <a href="index.html" class="footer__link"
+                                    >Главная</a
+                                >
+                            </li>
+                            <li>
+                                <a href="about.html" class="footer__link"
+                                    >Обо мне</a
+                                >
+                            </li>
+                            <li>
+                                <a href="services.html" class="footer__link"
+                                    >Услуги</a
+                                >
+                            </li>
+                            <li>
+                                <a href="how-it-works.html" class="footer__link"
+                                    >Как проходит</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="footer__title">Информация</h4>
+                        <ul class="footer__list">
+                            <li>
+                                <a href="blog.html" class="footer__link"
+                                    >Блог</a
+                                >
+                            </li>
+                            <li>
+                                <a href="faq.html" class="footer__link">FAQ</a>
+                            </li>
+                            <li>
+                                <a href="contact.html" class="footer__link"
+                                    >Контакты</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="footer__title">Связаться</h4>
+                        <ul class="footer__list">
+                            <li>
+                                <a
+                                    href="https://t.me/username"
+                                    class="footer__link"
+                                    target="_blank"
+                                    rel="noopener"
+                                    >Telegram</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="https://wa.me/79001234567"
+                                    class="footer__link"
+                                    target="_blank"
+                                    rel="noopener"
+                                    >WhatsApp</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="https://instagram.com/username"
+                                    class="footer__link"
+                                    target="_blank"
+                                    rel="noopener"
+                                    >Instagram</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="https://vk.com/username"
+                                    class="footer__link"
+                                    target="_blank"
+                                    rel="noopener"
+                                    >VK</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer__bottom">
+                    <p>&copy; 2025 Имя Фамилия. Все права защищены.</p>
+                </div>
+            </div>
+        </footer>
+
+        <script src="js/main.js"></script>
+    </body>
 </html>

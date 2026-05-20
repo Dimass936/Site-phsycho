@@ -1,203 +1,477 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Ответы на частые вопросы о работе с психологом: как проходит консультация, сколько длится, когда ожидать результат.">
-  <meta property="og:title" content="FAQ — Психолог онлайн">
-  <title>FAQ — Психолог онлайн</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/pages/faq.css">
-  <link rel="stylesheet" href="css/responsive.css">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="Ответы на частые вопросы о работе с психологом: как проходит консультация, сколько длится, когда ожидать результат."
+        />
+        <meta property="og:title" content="FAQ — Психолог онлайн" />
+        <meta
+            property="og:description"
+            content="Ответы на частые вопросы: как проходит онлайн-консультация, сколько сессий нужно, конфиденциальность, оплата."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="/faq.html" />
+        <meta property="og:locale" content="ru_RU" />
+        <link rel="canonical" href="/faq.html" />
+        <link rel="icon" href="img/favicon.svg" type="image/svg+xml" />
+        <title>FAQ — Психолог онлайн</title>
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "Person",
+                        "name": "Имя Фамилия",
+                        "jobTitle": "Психолог",
+                        "description": "Практикующий психолог. Онлайн-консультации для взрослых, пар и подростков.",
+                        "url": "/faq.html",
+                        "sameAs": [
+                            "https://t.me/username",
+                            "https://wa.me/79001234567",
+                            "https://instagram.com/username",
+                            "https://vk.com/username"
+                        ]
+                    },
+                    {
+                        "@type": "FAQPage",
+                        "mainEntity": [
+                            {
+                                "@type": "Question",
+                                "name": "Как проходит онлайн-консультация?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Мы подключаемся к видеозвонку через Zoom, Google Meet или другой удобной платформе. Сессия длится 50 минут — это стандартное время для терапевтической работы. Всё, что вам нужно — стабильный интернет, тихое место и наушники (по желанию)."
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": "Сколько сессий нужно для результата?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Это зависит от вашего запроса. Для конкретных проблем (например, страх публичных выступлений) может хватить 5–10 сессий. Для более глубокой работы — от нескольких месяцев. Мы обсудим ориентировочные сроки на первой встрече."
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": "Что если мне станет хуже после сессии?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Иногда после сессии может быть непривычная эмоциональная нагрузка — это нормально, когда мы касаемся сложных тем. Если вам тяжело между сессиями — напишите мне, и мы обсудим это. Также я подскажу техники саморегуляции."
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": "Конфиденциальна ли информация?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Абсолютно. Всё, что происходит на сессии, остаётся между нами. Я соблюдаю этический кодекс психолога и законодательство о защите персональных данных. Я не разглашаю информацию о клиентах без их согласия."
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": "Как оплатить консультацию?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Оплата происходит после консультации. Доступные способы: перевод на карту, оплата через платёжные системы. Подробности обсудим при записи."
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": "Можно ли отменить или перенести сессию?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Да, но прошу предупреждать минимум за 24 часа. При отмене менее чем за 24 часа сессия оплачивается полностью. Это помогает уважать время друг друга."
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": "Работаете ли вы с детьми?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Да, работаю с детьми от 4 лет. Сессии с детьми проходят с участием родителей или отдельно — зависит от возраста и ситуации. Для подростков (13–17 лет) возможна индивидуальная работа."
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": "Чем психолог отличается от психиатра?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Психолог работает через беседу и терапевтические методы — помогает справиться с жизненными трудностями, понять себя и найти ресурсы. Психиатр — врач, который может назначать медикаменты. При необходимости я могу порекомендовать психиатра для комплексной работы."
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="css/base.css" />
+        <link rel="stylesheet" href="css/components.css" />
+        <link rel="stylesheet" href="css/layout.css" />
+        <link rel="stylesheet" href="css/pages/faq.css" />
+        <link rel="stylesheet" href="css/responsive.css" />
+    </head>
+    <body>
+        <header class="header">
+            <div class="container header__inner">
+                <a href="index.html" class="header__logo">Имя Фамилия</a>
+                <nav class="header__nav">
+                    <ul class="header__nav-list">
+                        <li>
+                            <a href="index.html" class="header__nav-link"
+                                >Главная</a
+                            >
+                        </li>
+                        <li>
+                            <a href="about.html" class="header__nav-link"
+                                >Обо мне</a
+                            >
+                        </li>
+                        <li>
+                            <a href="services.html" class="header__nav-link"
+                                >Услуги</a
+                            >
+                        </li>
+                        <li>
+                            <a href="how-it-works.html" class="header__nav-link"
+                                >Как проходит</a
+                            >
+                        </li>
+                        <li>
+                            <a href="blog.html" class="header__nav-link"
+                                >Блог</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="faq.html"
+                                class="header__nav-link header__nav-link--active"
+                                >FAQ</a
+                            >
+                        </li>
+                        <li>
+                            <a href="contact.html" class="header__nav-link"
+                                >Контакты</a
+                            >
+                        </li>
+                    </ul>
+                </nav>
+                <a href="contact.html" class="btn btn--primary header__cta"
+                    >Записаться</a
+                >
+                <button class="burger" aria-label="Открыть меню">
+                    <span class="burger__line"></span
+                    ><span class="burger__line"></span
+                    ><span class="burger__line"></span>
+                </button>
+            </div>
+        </header>
 
-  <header class="header">
-    <div class="container header__inner">
-      <a href="index.html" class="header__logo">Имя Фамилия</a>
-      <nav class="header__nav">
-        <ul class="header__nav-list">
-          <li><a href="index.html" class="header__nav-link">Главная</a></li>
-          <li><a href="about.html" class="header__nav-link">Обо мне</a></li>
-          <li><a href="services.html" class="header__nav-link">Услуги</a></li>
-          <li><a href="how-it-works.html" class="header__nav-link">Как проходит</a></li>
-          <li><a href="blog.html" class="header__nav-link">Блог</a></li>
-          <li><a href="faq.html" class="header__nav-link header__nav-link--active">FAQ</a></li>
-          <li><a href="contact.html" class="header__nav-link">Контакты</a></li>
-        </ul>
-      </nav>
-      <a href="contact.html" class="btn btn--primary header__cta">Записаться</a>
-      <button class="burger" aria-label="Открыть меню">
-        <span class="burger__line"></span><span class="burger__line"></span><span class="burger__line"></span>
-      </button>
-    </div>
-  </header>
-
-  <div class="mobile-menu">
-    <ul class="mobile-menu__list">
-      <li><a href="index.html" class="mobile-menu__link">Главная</a></li>
-      <li><a href="about.html" class="mobile-menu__link">Обо мне</a></li>
-      <li><a href="services.html" class="mobile-menu__link">Услуги</a></li>
-      <li><a href="how-it-works.html" class="mobile-menu__link">Как проходит</a></li>
-      <li><a href="blog.html" class="mobile-menu__link">Блог</a></li>
-      <li><a href="faq.html" class="mobile-menu__link">FAQ</a></li>
-      <li><a href="contact.html" class="mobile-menu__link">Контакты</a></li>
-    </ul>
-    <a href="contact.html" class="btn btn--primary btn--full mobile-menu__cta">Записаться на консультацию</a>
-  </div>
-
-  <section class="page-hero">
-    <div class="container">
-      <div class="page-hero__center">
-        <span class="badge badge--blue">Вопросы и ответы</span>
-        <h1>Частые вопросы</h1>
-        <p>Собрала ответы на самые популярные вопросы. Если не нашли свой — напишите, и я отвечу.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--bg">
-    <div class="container">
-      <div class="faq-list">
-        <div class="faq-item">
-          <button class="faq-item__button">
-            <span>Как проходит онлайн-консультация?</span>
-            <span class="faq-item__icon">+</span>
-          </button>
-          <div class="faq-item__answer">
-            <p>Мы подключаемся к видеозвонку через Zoom, Google Meet или другой удобной платформе. Сессия длится 50 минут — это стандартное время для терапевтической работы. Всё, что вам нужно — стабильный интернет, тихое место и наушники (по желанию).</p>
-          </div>
+        <div class="mobile-menu">
+            <ul class="mobile-menu__list">
+                <li>
+                    <a href="index.html" class="mobile-menu__link">Главная</a>
+                </li>
+                <li>
+                    <a href="about.html" class="mobile-menu__link">Обо мне</a>
+                </li>
+                <li>
+                    <a href="services.html" class="mobile-menu__link">Услуги</a>
+                </li>
+                <li>
+                    <a href="how-it-works.html" class="mobile-menu__link"
+                        >Как проходит</a
+                    >
+                </li>
+                <li><a href="blog.html" class="mobile-menu__link">Блог</a></li>
+                <li><a href="faq.html" class="mobile-menu__link">FAQ</a></li>
+                <li>
+                    <a href="contact.html" class="mobile-menu__link"
+                        >Контакты</a
+                    >
+                </li>
+            </ul>
+            <a
+                href="contact.html"
+                class="btn btn--primary btn--full mobile-menu__cta"
+                >Записаться на консультацию</a
+            >
         </div>
 
-        <div class="faq-item">
-          <button class="faq-item__button">
-            <span>Сколько сессий нужно для результата?</span>
-            <span class="faq-item__icon">+</span>
-          </button>
-          <div class="faq-item__answer">
-            <p>Это зависит от вашего запроса. Для конкретных проблем (например, страх публичных выступлений) может хватить 5–10 сессий. Для более глубокой работы — от нескольких месяцев. Мы обсудим ориентировочные сроки на первой встрече.</p>
-          </div>
-        </div>
+        <section class="page-hero">
+            <div class="container">
+                <div class="page-hero__center">
+                    <span class="badge badge--blue">Вопросы и ответы</span>
+                    <h1>Частые вопросы</h1>
+                    <p>
+                        Собрала ответы на самые популярные вопросы. Если не
+                        нашли свой — напишите, и я отвечу.
+                    </p>
+                </div>
+            </div>
+        </section>
 
-        <div class="faq-item">
-          <button class="faq-item__button">
-            <span>Что если мне станет хуже после сессии?</span>
-            <span class="faq-item__icon">+</span>
-          </button>
-          <div class="faq-item__answer">
-            <p>Иногда после сессии может быть непривычная эмоциональная нагрузка — это нормально, когда мы касаемся сложных тем. Если вам тяжело между сессиями — напишите мне, и мы обсудим это. Также я подскажу техники саморегуляции.</p>
-          </div>
-        </div>
+        <section class="section section--bg">
+            <div class="container">
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <button class="faq-item__button" aria-expanded="false">
+                            <span>Как проходит онлайн-консультация?</span>
+                            <span class="faq-item__icon">+</span>
+                        </button>
+                        <div class="faq-item__answer">
+                            <p>
+                                Мы подключаемся к видеозвонку через Zoom, Google
+                                Meet или другой удобной платформе. Сессия длится
+                                50 минут — это стандартное время для
+                                терапевтической работы. Всё, что вам нужно —
+                                стабильный интернет, тихое место и наушники (по
+                                желанию).
+                            </p>
+                        </div>
+                    </div>
 
-        <div class="faq-item">
-          <button class="faq-item__button">
-            <span>Конфиденциальна ли информация?</span>
-            <span class="faq-item__icon">+</span>
-          </button>
-          <div class="faq-item__answer">
-            <p>Абсолютно. Всё, что происходит на сессии, остаётся между нами. Я соблюдаю этический кодекс психолога и законодательство о защите персональных данных. Я не разглашаю информацию о клиентах без их согласия.</p>
-          </div>
-        </div>
+                    <div class="faq-item">
+                        <button class="faq-item__button" aria-expanded="false">
+                            <span>Сколько сессий нужно для результата?</span>
+                            <span class="faq-item__icon">+</span>
+                        </button>
+                        <div class="faq-item__answer">
+                            <p>
+                                Это зависит от вашего запроса. Для конкретных
+                                проблем (например, страх публичных выступлений)
+                                может хватить 5–10 сессий. Для более глубокой
+                                работы — от нескольких месяцев. Мы обсудим
+                                ориентировочные сроки на первой встрече.
+                            </p>
+                        </div>
+                    </div>
 
-        <div class="faq-item">
-          <button class="faq-item__button">
-            <span>Как оплатить консультацию?</span>
-            <span class="faq-item__icon">+</span>
-          </button>
-          <div class="faq-item__answer">
-            <p>Оплата происходит после консультации. Доступные способы: перевод на карту, оплата через платёжные системы. Подробности обсудим при записи.</p>
-          </div>
-        </div>
+                    <div class="faq-item">
+                        <button class="faq-item__button" aria-expanded="false">
+                            <span>Что если мне станет хуже после сессии?</span>
+                            <span class="faq-item__icon">+</span>
+                        </button>
+                        <div class="faq-item__answer">
+                            <p>
+                                Иногда после сессии может быть непривычная
+                                эмоциональная нагрузка — это нормально, когда мы
+                                касаемся сложных тем. Если вам тяжело между
+                                сессиями — напишите мне, и мы обсудим это. Также
+                                я подскажу техники саморегуляции.
+                            </p>
+                        </div>
+                    </div>
 
-        <div class="faq-item">
-          <button class="faq-item__button">
-            <span>Можно ли отменить или перенести сессию?</span>
-            <span class="faq-item__icon">+</span>
-          </button>
-          <div class="faq-item__answer">
-            <p>Да, но прошу предупреждать минимум за 24 часа. При отмене менее чем за 24 часа сессия оплачивается полностью. Это помогает уважать время друг друга.</p>
-          </div>
-        </div>
+                    <div class="faq-item">
+                        <button class="faq-item__button" aria-expanded="false">
+                            <span>Конфиденциальна ли информация?</span>
+                            <span class="faq-item__icon">+</span>
+                        </button>
+                        <div class="faq-item__answer">
+                            <p>
+                                Абсолютно. Всё, что происходит на сессии,
+                                остаётся между нами. Я соблюдаю этический кодекс
+                                психолога и законодательство о защите
+                                персональных данных. Я не разглашаю информацию о
+                                клиентах без их согласия.
+                            </p>
+                        </div>
+                    </div>
 
-        <div class="faq-item">
-          <button class="faq-item__button">
-            <span>Работаете ли вы с детьми?</span>
-            <span class="faq-item__icon">+</span>
-          </button>
-          <div class="faq-item__answer">
-            <p>Да, работаю с детьми от 4 лет. Сессии с детьми проходят с участием родителей или отдельно — зависит от возраста и ситуации. Для подростков (13–17 лет) возможна индивидуальная работа.</p>
-          </div>
-        </div>
+                    <div class="faq-item">
+                        <button class="faq-item__button" aria-expanded="false">
+                            <span>Как оплатить консультацию?</span>
+                            <span class="faq-item__icon">+</span>
+                        </button>
+                        <div class="faq-item__answer">
+                            <p>
+                                Оплата происходит после консультации. Доступные
+                                способы: перевод на карту, оплата через
+                                платёжные системы. Подробности обсудим при
+                                записи.
+                            </p>
+                        </div>
+                    </div>
 
-        <div class="faq-item">
-          <button class="faq-item__button">
-            <span>Чем психолог отличается от психиатра?</span>
-            <span class="faq-item__icon">+</span>
-          </button>
-          <div class="faq-item__answer">
-            <p>Психолог работает через беседу и терапевтические методы — помогает справиться с жизненными трудностями, понять себя и найти ресурсы. Психиатр — врач, который может назначать медикаменты. При необходимости я могу порекомендовать психиатра для комплексной работы.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+                    <div class="faq-item">
+                        <button class="faq-item__button" aria-expanded="false">
+                            <span>Можно ли отменить или перенести сессию?</span>
+                            <span class="faq-item__icon">+</span>
+                        </button>
+                        <div class="faq-item__answer">
+                            <p>
+                                Да, но прошу предупреждать минимум за 24 часа.
+                                При отмене менее чем за 24 часа сессия
+                                оплачивается полностью. Это помогает уважать
+                                время друг друга.
+                            </p>
+                        </div>
+                    </div>
 
-  <section class="section">
-    <div class="container">
-      <div class="section__header">
-        <h2 class="section__title">Не нашли свой вопрос?</h2>
-        <p class="section__subtitle">Напишите мне — отвечу на любой вопрос, который вас волнует</p>
-      </div>
-      <div class="text-center">
-        <a href="contact.html" class="btn btn--primary btn--large">Связаться со мной</a>
-      </div>
-    </div>
-  </section>
+                    <div class="faq-item">
+                        <button class="faq-item__button" aria-expanded="false">
+                            <span>Работаете ли вы с детьми?</span>
+                            <span class="faq-item__icon">+</span>
+                        </button>
+                        <div class="faq-item__answer">
+                            <p>
+                                Да, работаю с детьми от 4 лет. Сессии с детьми
+                                проходят с участием родителей или отдельно —
+                                зависит от возраста и ситуации. Для подростков
+                                (13–17 лет) возможна индивидуальная работа.
+                            </p>
+                        </div>
+                    </div>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__inner">
-        <div class="footer__brand">
-          <div class="footer__logo">Имя Фамилия</div>
-          <p>Практикующий психолог. Онлайн-консультации для взрослых, пар и подростков.</p>
-        </div>
-        <div>
-          <h4 class="footer__title">Навигация</h4>
-          <ul class="footer__list">
-            <li><a href="index.html" class="footer__link">Главная</a></li>
-            <li><a href="about.html" class="footer__link">Обо мне</a></li>
-            <li><a href="services.html" class="footer__link">Услуги</a></li>
-            <li><a href="how-it-works.html" class="footer__link">Как проходит</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="footer__title">Информация</h4>
-          <ul class="footer__list">
-            <li><a href="blog.html" class="footer__link">Блог</a></li>
-            <li><a href="faq.html" class="footer__link">FAQ</a></li>
-            <li><a href="contact.html" class="footer__link">Контакты</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="footer__title">Связаться</h4>
-          <ul class="footer__list">
-            <li><a href="https://t.me/username" class="footer__link" target="_blank" rel="noopener">Telegram</a></li>
-            <li><a href="https://wa.me/79001234567" class="footer__link" target="_blank" rel="noopener">WhatsApp</a></li>
-            <li><a href="https://instagram.com/username" class="footer__link" target="_blank" rel="noopener">Instagram</a></li>
-            <li><a href="https://vk.com/username" class="footer__link" target="_blank" rel="noopener">VK</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer__bottom"><p>&copy; 2025 Имя Фамилия. Все права защищены.</p></div>
-    </div>
-  </footer>
+                    <div class="faq-item">
+                        <button class="faq-item__button" aria-expanded="false">
+                            <span>Чем психолог отличается от психиатра?</span>
+                            <span class="faq-item__icon">+</span>
+                        </button>
+                        <div class="faq-item__answer">
+                            <p>
+                                Психолог работает через беседу и терапевтические
+                                методы — помогает справиться с жизненными
+                                трудностями, понять себя и найти ресурсы.
+                                Психиатр — врач, который может назначать
+                                медикаменты. При необходимости я могу
+                                порекомендовать психиатра для комплексной
+                                работы.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <script src="js/main.js"></script>
-  <script src="js/faq.js"></script>
-</body>
+        <section class="section">
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="section__title">Не нашли свой вопрос?</h2>
+                    <p class="section__subtitle">
+                        Напишите мне — отвечу на любой вопрос, который вас
+                        волнует
+                    </p>
+                </div>
+                <div class="text-center">
+                    <a href="contact.html" class="btn btn--primary btn--large"
+                        >Связаться со мной</a
+                    >
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer__inner">
+                    <div class="footer__brand">
+                        <div class="footer__logo">Имя Фамилия</div>
+                        <p>
+                            Практикующий психолог. Онлайн-консультации для
+                            взрослых, пар и подростков.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="footer__title">Навигация</h4>
+                        <ul class="footer__list">
+                            <li>
+                                <a href="index.html" class="footer__link"
+                                    >Главная</a
+                                >
+                            </li>
+                            <li>
+                                <a href="about.html" class="footer__link"
+                                    >Обо мне</a
+                                >
+                            </li>
+                            <li>
+                                <a href="services.html" class="footer__link"
+                                    >Услуги</a
+                                >
+                            </li>
+                            <li>
+                                <a href="how-it-works.html" class="footer__link"
+                                    >Как проходит</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="footer__title">Информация</h4>
+                        <ul class="footer__list">
+                            <li>
+                                <a href="blog.html" class="footer__link"
+                                    >Блог</a
+                                >
+                            </li>
+                            <li>
+                                <a href="faq.html" class="footer__link">FAQ</a>
+                            </li>
+                            <li>
+                                <a href="contact.html" class="footer__link"
+                                    >Контакты</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="footer__title">Связаться</h4>
+                        <ul class="footer__list">
+                            <li>
+                                <a
+                                    href="https://t.me/username"
+                                    class="footer__link"
+                                    target="_blank"
+                                    rel="noopener"
+                                    >Telegram</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="https://wa.me/79001234567"
+                                    class="footer__link"
+                                    target="_blank"
+                                    rel="noopener"
+                                    >WhatsApp</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="https://instagram.com/username"
+                                    class="footer__link"
+                                    target="_blank"
+                                    rel="noopener"
+                                    >Instagram</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="https://vk.com/username"
+                                    class="footer__link"
+                                    target="_blank"
+                                    rel="noopener"
+                                    >VK</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer__bottom">
+                    <p>&copy; 2025 Имя Фамилия. Все права защищены.</p>
+                </div>
+            </div>
+        </footer>
+
+        <script src="js/main.js"></script>
+        <script src="js/faq.js"></script>
+    </body>
 </html>
