@@ -1,0 +1,120 @@
+/* ============================================
+   SERVICES PAGE STYLES
+   ============================================ */
+
+.page-hero__center {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: var(--space-4xl) 0 var(--space-2xl);
+}
+
+.page-hero__center h1 {
+  margin-bottom: var(--space-md);
+}
+
+.page-hero__center p {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+
+.service-detail-card {
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+.service-detail-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+.service-detail-card__header {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.service-detail-card__emoji {
+  font-size: var(--text-3xl);
+  display: block;
+  margin-bottom: var(--space-sm);
+}
+
+.service-detail-card__header h3 {
+  font-size: var(--text-xl);
+}
+
+.service-detail-card__desc {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--space-lg);
+}
+
+.service-detail-card__list {
+  list-style: none;
+  margin-bottom: var(--space-xl);
+  flex: 1;
+}
+
+.service-detail-card__list li {
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+  padding: var(--space-xs) 0;
+  padding-left: var(--space-lg);
+  position: relative;
+}
+
+.service-detail-card__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent-green);
+}
+
+.service-detail-card__footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--color-border-light);
+}
+
+.service-detail-card__price {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+@media (max-width: 1023px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-detail-card {
+    padding: var(--space-lg);
+  }
+}

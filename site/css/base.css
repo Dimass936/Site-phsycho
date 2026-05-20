@@ -1,0 +1,196 @@
+/* ============================================
+   BASE STYLES & CSS CUSTOM PROPERTIES
+   Сайт психолога — базовые стили
+   ============================================ */
+
+/* --- Reset & Base --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 100%;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-accent-green);
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+/* --- CSS Custom Properties --- */
+:root {
+  /* Colors */
+  --color-bg-primary: #F5F0EB;
+  --color-bg-secondary: #FFFFFF;
+  --color-bg-accent: #EDE7E0;
+  --color-text-primary: #2D2D2D;
+  --color-text-secondary: #6B6B6B;
+  --color-text-light: #8A8A8A;
+  --color-accent-green: #7FB069;
+  --color-accent-green-hover: #6A9A56;
+  --color-accent-blue: #6B9DAD;
+  --color-accent-blue-hover: #5A8A9A;
+  --color-accent-warm: #D4A574;
+  --color-border: #E0D5CC;
+  --color-border-light: #EDE7E0;
+
+  /* Typography */
+  --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
+
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-base: 1rem;     /* 16px */
+  --text-lg: 1.125rem;   /* 18px */
+  --text-xl: 1.25rem;    /* 20px */
+  --text-2xl: 1.5rem;    /* 24px */
+  --text-3xl: 1.875rem;  /* 30px */
+  --text-4xl: 2.25rem;   /* 36px */
+  --text-5xl: 3rem;      /* 48px */
+
+  /* Spacing */
+  --space-2xs: 0.25rem;  /* 4px */
+  --space-xs: 0.5rem;    /* 8px */
+  --space-sm: 0.75rem;   /* 12px */
+  --space-md: 1rem;      /* 16px */
+  --space-lg: 1.5rem;    /* 24px */
+  --space-xl: 2rem;      /* 32px */
+  --space-2xl: 3rem;     /* 48px */
+  --space-3xl: 4rem;     /* 64px */
+  --space-4xl: 6rem;     /* 96px */
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(45, 45, 45, 0.06);
+  --shadow-md: 0 4px 12px rgba(45, 45, 45, 0.08);
+  --shadow-lg: 0 8px 24px rgba(45, 45, 45, 0.1);
+  --shadow-xl: 0 12px 32px rgba(45, 45, 45, 0.12);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+
+  /* Z-index layers */
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+
+  /* Layout */
+  --max-width: 1200px;
+  --header-height: 72px;
+}
+
+/* --- Typography --- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--color-text-primary);
+}
+
+h1 {
+  font-size: var(--text-4xl);
+}
+
+h2 {
+  font-size: var(--text-3xl);
+}
+
+h3 {
+  font-size: var(--text-2xl);
+}
+
+h4 {
+  font-size: var(--text-xl);
+}
+
+p {
+  margin-bottom: var(--space-md);
+  line-height: 1.7;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Utility Classes --- */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

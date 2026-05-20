@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Блог психолога: статьи о детской психологии, отношениях, стрессе и саморазвитии. Полезные материалы для взрослых и родителей.">
+  <meta property="og:title" content="Блог — Психолог онлайн">
+  <title>Блог — Психолог онлайн</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/pages/blog.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header__inner">
+      <a href="index.html" class="header__logo">Имя Фамилия</a>
+      <nav class="header__nav">
+        <ul class="header__nav-list">
+          <li><a href="index.html" class="header__nav-link">Главная</a></li>
+          <li><a href="about.html" class="header__nav-link">Обо мне</a></li>
+          <li><a href="services.html" class="header__nav-link">Услуги</a></li>
+          <li><a href="how-it-works.html" class="header__nav-link">Как проходит</a></li>
+          <li><a href="blog.html" class="header__nav-link header__nav-link--active">Блог</a></li>
+          <li><a href="faq.html" class="header__nav-link">FAQ</a></li>
+          <li><a href="contact.html" class="header__nav-link">Контакты</a></li>
+        </ul>
+      </nav>
+      <a href="contact.html" class="btn btn--primary header__cta">Записаться</a>
+      <button class="burger" aria-label="Открыть меню">
+        <span class="burger__line"></span><span class="burger__line"></span><span class="burger__line"></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-menu">
+    <ul class="mobile-menu__list">
+      <li><a href="index.html" class="mobile-menu__link">Главная</a></li>
+      <li><a href="about.html" class="mobile-menu__link">Обо мне</a></li>
+      <li><a href="services.html" class="mobile-menu__link">Услуги</a></li>
+      <li><a href="how-it-works.html" class="mobile-menu__link">Как проходит</a></li>
+      <li><a href="blog.html" class="mobile-menu__link">Блог</a></li>
+      <li><a href="faq.html" class="mobile-menu__link">FAQ</a></li>
+      <li><a href="contact.html" class="mobile-menu__link">Контакты</a></li>
+    </ul>
+    <a href="contact.html" class="btn btn--primary btn--full mobile-menu__cta">Записаться на консультацию</a>
+  </div>
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__center">
+        <span class="badge badge--warm">Блог</span>
+        <h1>Полезные материалы</h1>
+        <p>Статьи о психологии, отношениях, воспитании детей и заботе о себе. Пишу просто о сложном.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--bg">
+    <div class="container">
+      <div class="blog-filters">
+        <button class="blog-filter-btn blog-filter-btn--active" data-filter="all">Все</button>
+        <button class="blog-filter-btn" data-filter="relationships">Отношения</button>
+        <button class="blog-filter-btn" data-filter="children">Дети</button>
+        <button class="blog-filter-btn" data-filter="stress">Стресс</button>
+        <button class="blog-filter-btn" data-filter="self">Саморазвитие</button>
+      </div>
+
+      <div class="blog-grid">
+        <article class="blog-card" data-category="stress">
+          <div class="blog-card__image">
+            <div class="blog-card__placeholder">🌿</div>
+          </div>
+          <div class="blog-card__content">
+            <div class="blog-card__meta">
+              <span class="badge badge--green">Стресс</span>
+              <span class="blog-card__date">20 мая 2025</span>
+            </div>
+            <h3 class="blog-card__title">5 признаков эмоционального выгорания, которые мы часто игнорируем</h3>
+            <p class="blog-card__excerpt">Выгорание подкрадывается незаметно. Разбираем ранние сигналы и способы позаботиться о себе до того, как станет поздно.</p>
+            <a href="#" class="blog-card__link">Читать далее →</a>
+          </div>
+        </article>
+
+        <article class="blog-card" data-category="relationships">
+          <div class="blog-card__image">
+            <div class="blog-card__placeholder">👫</div>
+          </div>
+          <div class="blog-card__content">
+            <div class="blog-card__meta">
+              <span class="badge badge--blue">Отношения</span>
+              <span class="blog-card__date">15 мая 2025</span>
+            </div>
+            <h3 class="blog-card__title">Почему мы повторяем одни и те же конфликты в отношениях</h3>
+            <p class="blog-card__excerpt">Паттерны конфликтов — это не про «плохой характер». Разбираемся, почему мы ходим по кругу и как из него выйти.</p>
+            <a href="#" class="blog-card__link">Читать далее →</a>
+          </div>
+        </article>
+
+        <article class="blog-card" data-category="children">
+          <div class="blog-card__image">
+            <div class="blog-card__placeholder">🧒</div>
+          </div>
+          <div class="blog-card__content">
+            <div class="blog-card__meta">
+              <span class="badge badge--warm">Дети</span>
+              <span class="blog-card__date">10 мая 2025</span>
+            </div>
+            <h3 class="blog-card__title">Как говорить с ребёнком о сложных эмоциях</h3>
+            <p class="blog-card__excerpt">Дети чувствуют не меньше нас — просто не всегда умеют выразить. Рассказываю, как помочь ребёнку понять свои чувства.</p>
+            <a href="#" class="blog-card__link">Читать далее →</a>
+          </div>
+        </article>
+
+        <article class="blog-card" data-category="self">
+          <div class="blog-card__image">
+            <div class="blog-card__placeholder">💪</div>
+          </div>
+          <div class="blog-card__content">
+            <div class="blog-card__meta">
+              <span class="badge badge--green">Саморазвитие</span>
+              <span class="blog-card__date">5 мая 2025</span>
+            </div>
+            <h3 class="blog-card__title">Как перестать зависеть от чужого мнения</h3>
+            <p class="blog-card__excerpt">Зависимость от чужих оценок — одна из самых распространённых причин тревоги. Разбираем практические шаги к внутренней свободе.</p>
+            <a href="#" class="blog-card__link">Читать далее →</a>
+          </div>
+        </article>
+
+        <article class="blog-card" data-category="stress">
+          <div class="blog-card__image">
+            <div class="blog-card__placeholder">😰</div>
+          </div>
+          <div class="blog-card__content">
+            <div class="blog-card__meta">
+              <span class="badge badge--green">Стресс</span>
+              <span class="blog-card__date">1 мая 2025</span>
+            </div>
+            <h3 class="blog-card__title">Паническая атака: что делать и как помочь себе</h3>
+            <p class="blog-card__excerpt">Пошаговая инструкция: что делать во время панической атаки и как снизить их частоту в долгосрочной перспективе.</p>
+            <a href="#" class="blog-card__link">Читать далее →</a>
+          </div>
+        </article>
+
+        <article class="blog-card" data-category="relationships">
+          <div class="blog-card__image">
+            <div class="blog-card__placeholder">💔</div>
+          </div>
+          <div class="blog-card__content">
+            <div class="blog-card__meta">
+              <span class="badge badge--blue">Отношения</span>
+              <span class="blog-card__date">25 апреля 2025</span>
+            </div>
+            <h3 class="blog-card__title">Как пережить расставание и не потерять себя</h3>
+            <p class="blog-card__excerpt">Расставание — это потеря, и её нужно прожить. Рассказываю, как пройти через этот период с заботой о себе.</p>
+            <a href="#" class="blog-card__link">Читать далее →</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="text-center" style="margin-top: var(--space-2xl);">
+        <button class="btn btn--secondary">Показать ещё</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background-color: var(--color-accent-green); color: #FFFFFF;">
+    <div class="container text-center">
+      <h2 class="section__title" style="color: #FFFFFF;">Хотите узнать больше?</h2>
+      <p class="section__subtitle" style="color: rgba(255,255,255,0.85); max-width: 560px; margin: 0 auto var(--space-xl);">
+        Статьи — это полезно, но личная работа даёт гораздо больше. Запишитесь на консультацию.
+      </p>
+      <a href="contact.html" class="btn" style="background-color: #FFFFFF; color: var(--color-accent-green); font-size: var(--text-lg); padding: var(--space-md) var(--space-xl);">Записаться</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <div class="footer__logo">Имя Фамилия</div>
+          <p>Практикующий психолог. Онлайн-консультации для взрослых, пар и подростков.</p>
+        </div>
+        <div>
+          <h4 class="footer__title">Навигация</h4>
+          <ul class="footer__list">
+            <li><a href="index.html" class="footer__link">Главная</a></li>
+            <li><a href="about.html" class="footer__link">Обо мне</a></li>
+            <li><a href="services.html" class="footer__link">Услуги</a></li>
+            <li><a href="how-it-works.html" class="footer__link">Как проходит</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer__title">Информация</h4>
+          <ul class="footer__list">
+            <li><a href="blog.html" class="footer__link">Блог</a></li>
+            <li><a href="faq.html" class="footer__link">FAQ</a></li>
+            <li><a href="contact.html" class="footer__link">Контакты</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer__title">Связаться</h4>
+          <ul class="footer__list">
+            <li><a href="https://t.me/username" class="footer__link" target="_blank" rel="noopener">Telegram</a></li>
+            <li><a href="https://wa.me/79001234567" class="footer__link" target="_blank" rel="noopener">WhatsApp</a></li>
+            <li><a href="https://instagram.com/username" class="footer__link" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://vk.com/username" class="footer__link" target="_blank" rel="noopener">VK</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom"><p>&copy; 2025 Имя Фамилия. Все права защищены.</p></div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Blog filter
+    (function() {
+      const buttons = document.querySelectorAll('.blog-filter-btn');
+      const cards = document.querySelectorAll('.blog-card');
+
+      buttons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          buttons.forEach(function(b) { b.classList.remove('blog-filter-btn--active'); });
+          btn.classList.add('blog-filter-btn--active');
+
+          const filter = btn.dataset.filter;
+
+          cards.forEach(function(card) {
+            if (filter === 'all' || card.dataset.category === filter) {
+              card.style.display = '';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

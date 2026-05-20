@@ -1,0 +1,81 @@
+/* ============================================
+   HOW IT WORKS PAGE STYLES
+   ============================================ */
+
+.steps {
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.step {
+  display: flex;
+  gap: var(--space-lg);
+  align-items: flex-start;
+}
+
+.step__number {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent-green);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-lg);
+  font-weight: 700;
+  font-family: var(--font-heading);
+}
+
+.step__content h3 {
+  margin-bottom: var(--space-sm);
+  font-size: var(--text-xl);
+}
+
+.step__content p {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--space-sm);
+}
+
+.step__list {
+  list-style: none;
+  padding: 0;
+}
+
+.step__list li {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  padding: var(--space-xs) 0 var(--space-xs) var(--space-lg);
+  position: relative;
+}
+
+.step__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent-green);
+}
+
+@media (max-width: 767px) {
+  .step {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .step__number {
+    width: 40px;
+    height: 40px;
+    font-size: var(--text-base);
+  }
+}
