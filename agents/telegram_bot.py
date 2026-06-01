@@ -27,16 +27,14 @@ from dotenv import load_dotenv
 load_dotenv()
 
 TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
-USER_ID = int(os.getenv("TELEGRAM_USER_ID", "0"))
-ADMIN_IDS: list[int] = [
-    int(x.strip()) for x in os.getenv("TELEGRAM_USER_ID", "0").split(",") if x.strip()
-]
+USER_IDS_RAW = os.getenv("TELEGRAM_USER_ID", "0")
+ADMIN_IDS: list[int] = [int(x.strip()) for x in USER_IDS_RAW.split(",") if x.strip()]
 CHANNEL_ID = os.getenv("TELEGRAM_CHANNEL_ID")
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RATE_FILE = os.path.join(PROJECT_DIR, "last_post.txt")
 PENDING_FILE = os.path.join(PROJECT_DIR, "pending_posts.json")
 
-if not TOKEN or not USER_ID:
+if not TOKEN or not USER_IDS_RAW:
     print("❌ TELEGRAM_BOT_TOKEN или TELEGRAM_USER_ID не заданы в .env")
     sys.exit(1)
 
@@ -687,7 +685,7 @@ async def handle_unknown(update: Update, context: ContextTypes.DEFAULT_TYPE):
 def main():
     print("=" * 50)
     print("🤖 Telegram Bot — запуск")
-    print(f"   Владелец ID: {USER_ID}")
+    print(f"   Админы ID: {USER_IDS_RAW}")
     print(f"   Канал ID: {CHANNEL_ID}")
     print("=" * 50)
 
