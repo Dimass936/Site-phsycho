@@ -15,6 +15,7 @@ CMO Agent — Chief Marketing Officer для сайта психолога Ан�
 import os
 import sys
 from datetime import datetime, timedelta
+
 from dotenv import load_dotenv
 from openai import OpenAI
 
@@ -35,6 +36,7 @@ client = OpenAI(api_key=API_KEY, base_url="https://api.deepseek.com")
 
 # ── Чтение файлов ──────────────────────────────────────────────────────
 
+
 def read_file(path: str) -> str:
     full_path = os.path.join(PROJECT_DIR, path)
     if not os.path.exists(full_path):
@@ -52,6 +54,7 @@ def write_file(path: str, content: str):
 
 # ── DeepSeek API вызов ─────────────────────────────────────────────────
 
+
 def ask_deepseek(system_prompt: str, user_prompt: str) -> str:
     response = client.chat.completions.create(
         model=MODEL,
@@ -62,13 +65,16 @@ def ask_deepseek(system_prompt: str, user_prompt: str) -> str:
         temperature=0.7,
         max_tokens=8000,
     )
-    return response.choices[0].message.content
+    result = response.choices[0].message.content
+    return result if result is not None else ""
 
 
 # ── Генерация стратегии на месяц ───────────────────────────────────────
 
+
 def generate_monthly_strategy():
     print("📊 Чтение стратегии продукта...")
+    _ = read_file("PRODUCT_STRATEGY.md")  # загружаем, но используем ниже
     product_strategy = read_file("PRODUCT_STRATEGY.md")
     requirements = read_file("REQUIREMENTS.md")
     project = read_file("PROJECT.md")
@@ -99,8 +105,8 @@ def generate_monthly_strategy():
 Используй информацию из PRODUCT_STRATEGY.md для тем и growth loops.
 Пиши на русском языке."""
 
-    user_prompt = f"""Сегодня: {today.strftime('%d.%m.%Y')}
-Месяц: {today.strftime('%B %Y')} — {next_month.strftime('%B %Y')}
+    user_prompt = f"""Сегодня: {today.strftime("%d.%m.%Y")}
+Месяц: {today.strftime("%B %Y")} — {next_month.strftime("%B %Y")}
 
 === СТРАТЕГИЯ ПРОДУКТА ===
 {product_strategy[:3000]}
@@ -119,8 +125,8 @@ def generate_monthly_strategy():
     # Добавляем мета-информацию
     header = f"""# MARKETING_PLAN.md — Маркетинговый план
 
-> Сгенерирован CMO Agent: {today.strftime('%d.%m.%Y %H:%M')}
-> Период: {today.strftime('%d.%m.%Y')} — {next_month.strftime('%d.%m.%Y')}
+> Сгенерирован CMO Agent: {today.strftime("%d.%m.%Y %H:%M")}
+> Период: {today.strftime("%d.%m.%Y")} — {next_month.strftime("%d.%m.%Y")}
 > Модель: {MODEL}
 > Статус: ✅ Активен
 
@@ -129,17 +135,22 @@ def generate_monthly_strategy():
 """
     write_file("MARKETING_PLAN.md", header + plan_content)
     print(f"📅 План создан: MARKETING_PLAN.md")
-    print(f"   Период: {today.strftime('%d.%m.%Y')} — {next_month.strftime('%d.%m.%Y')}")
+    print(
+        f"   Период: {today.strftime('%d.%m.%Y')} — {next_month.strftime('%d.%m.%Y')}"
+    )
 
 
 # ── Еженедельный анализ ────────────────────────────────────────────────
+
 
 def weekly_analysis():
     print("📈 Запуск еженедельного анализа...")
 
     marketing_plan = read_file("MARKETING_PLAN.md")
     if "[Файл MARKETING_PLAN.md не найден]" in marketing_plan:
-        print("❌ MARKETING_PLAN.md не найден. Сначала создайте план: python agents/cmo_agent.py")
+        print(
+            "❌ MARKETING_PLAN.md не найден. Сначала создайте план: python agents/cmo_agent.py"
+        )
         return
 
     today = datetime.now()
@@ -154,8 +165,8 @@ def weekly_analysis():
 
 Будь конкретным. Пиши на русском языке."""
 
-    user_prompt = f"""Сегодня: {today.strftime('%d.%m.%Y')}
-Неделя: {today.strftime('%d.%m.%Y')} — это анализная точка.
+    user_prompt = f"""Сегодня: {today.strftime("%d.%m.%Y")}
+Неделя: {today.strftime("%d.%m.%Y")} — это анализная точка.
 
 === ТЕКУЩИЙ ПЛАН ===
 {marketing_plan[:5000]}
@@ -167,7 +178,7 @@ def weekly_analysis():
     report_name = f"WEEKLY_REPORT_{today.strftime('%Y%m%d')}.md"
     header = f"""# Недельный отчёт CMO Agent
 
-> Дата: {today.strftime('%d.%m.%Y')}
+> Дата: {today.strftime("%d.%m.%Y")}
 > Модель: {MODEL}
 
 ---
