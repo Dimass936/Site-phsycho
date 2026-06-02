@@ -293,20 +293,36 @@ async def test(update: Update, context: ContextTypes.DEFAULT_TYPE):
         with open(style_path) as f:
             style = f.read()
 
-    # Выбираем тему
+    # Выбираем тему (только детская психология)
     import json
     import random
 
-    topic_text = (
-        "Напиши пост для канала на тему психологии, отношений или саморазвития."
-    )
+    topic_text = "Напиши пост для канала на тему детской психологии, воспитания, отношений с детьми."
     topics_file = os.path.join(PROJECT_DIR, "post_topics.json")
     if os.path.exists(topics_file):
         with open(topics_file) as f:
-            topics = json.load(f)
-        if topics:
-            chosen = random.choice(topics)
-            topic_text = f"Напиши пост на тему: {chosen['topic']}"
+            all_topics = json.load(f)
+        # Фильтруем: только темы по детской психологии
+        child_keywords = [
+            "ребён",
+            "дети",
+            "подрост",
+            "школ",
+            "матер",
+            "родител",
+            "детск",
+            "семь",
+            "мам",
+            "воспит",
+        ]
+        filtered = [
+            t
+            for t in all_topics
+            if any(kw in t["topic"].lower() for kw in child_keywords)
+        ]
+        if filtered:
+            chosen = random.choice(filtered)
+            topic_text = f"Напиши пост на тему детской психологии: {chosen['topic']}"
 
     load_dotenv()
     client = OpenAI(
@@ -323,7 +339,8 @@ async def test(update: Update, context: ContextTypes.DEFAULT_TYPE):
 - Тёплый, доверительный тон
 - Одна конкретная мысль
 - Призыв к взаимодействию в конце
-- ВАЖНО: сегодня {datetime.now().strftime("%A")}. Ссылайся на следующий пост в пятницу или вторник."""
+- ВАЖНО: сегодня {datetime.now().strftime("%A")}. Ссылайся на следующий пост в пятницу или вторник.
+- Тема: детская психология, воспитание, отношения с детьми и подростками"""
 
     r = client.chat.completions.create(
         model="deepseek-chat",
