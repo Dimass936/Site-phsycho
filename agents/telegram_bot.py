@@ -402,6 +402,18 @@ async def test(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 f"🖼️ Вариант {i + 1}: {img['url']}", reply_markup=kb
             )
 
+    # Кнопка "своя картинка"
+    own_kb = InlineKeyboardMarkup(
+        [
+            [
+                InlineKeyboardButton(
+                    "📎 Загрузить свою картинку", callback_data="upload_own"
+                ),
+            ]
+        ]
+    )
+    await update.message.reply_text("Не нравятся варианты?", reply_markup=own_kb)
+
     # Отправляем текст с кнопками действий
     action_kb = InlineKeyboardMarkup(
         [
@@ -466,15 +478,25 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif data == "img_ok":
         await query.answer("Картинка выбрана. Теперь нажмите действие под текстом.")
 
+    elif data == "upload_own":
+        entry["waiting_own_photo"] = True
+        cache[chat_id] = entry
+        await query.message.reply_text(
+            "📎 Отправьте вашу картинку (фото или изображение)."
+        )
+
     elif data == "approve":
-        # Публикуем в канал
         import requests
 
-        img_idx = entry.get("chosen_image", 0)
-        img_url = entry["images"][img_idx]["url"]
-
-        url = f"https://api.telegram.org/bot{TOKEN}/sendPhoto"
-        payload = {"chat_id": CHANNEL_ID, "photo": img_url, "caption": post[:1024]}
+        if entry.get("own_photo_id"):
+            # Отправляем свою картинку
+            url = f"https://api.telegram.org/bot{TOKEN}/sendPhoto"
+            payload = {"chat_id": CHANNEL_ID, "photo": entry["own_photo_id"], "caption": post[:1024]}
+        else:
+            img_idx = entry.get("chosen_image", 0)
+            img_url = entry["images"][img_idx]["url"]
+            url = f"https://api.telegram.org/bot{TOKEN}/sendPhoto"
+            payload = {"chat_id": CHANNEL_ID, "photo": img_url, "caption": post[:1024]}
         r = requests.post(url, json=payload, timeout=15)
 
         if r.status_code == 200:
@@ -855,10 +877,22 @@ def main():
         if not check_access(update):
             return
         msg = update.message
-        if msg and msg.text:
+        if msg:
             chat_id = str(update.effective_chat.id)
             cache = context.bot_data.get("post_cache", {})
             entry = cache.get(chat_id, {})
+
+            # Если ждём свою картинку
+            if entry.get("waiting_own_photo") and msg.photo:
+                entry["waiting_own_photo"] = False
+                # Сохраняем свою картинку как выбранную
+                photo = msg.photo[-1]
+                entry["own_photo_id"] = photo.file_id
+                cache[chat_id] = entry
+                await update.message.reply_text("✅ Ваша картинка сохранена! Теперь нажмите действие под текстом.")
+                return
+
+            if msg.text:
 
             # Если режим редактирования картинки
             if entry.get("editing_image") is not None:
