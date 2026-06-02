@@ -378,7 +378,7 @@ async def test(update: Update, context: ContextTypes.DEFAULT_TYPE):
             max_tokens=150,
         )
         img_desc = img_r.choices[0].message.content.strip()
-        img_url = f"https://image.pollinations.ai/prompt/{urllib.parse.quote(img_desc)}?width=768&height=768&nologo=true&model=flux"
+        img_url = f"https://image.pollinations.ai/prompt/{urllib.parse.quote(img_desc)}?width=768&height=768&nologo=true&model=flux&negative={urllib.parse.quote('deformity,extra fingers,blurry,low quality')}"
         image_urls.append({"url": img_url, "desc": img_desc})
 
     # Сохраняем в кеш для /edit и /ok
@@ -891,7 +891,7 @@ def main():
                 import urllib.parse
 
                 new_desc = img_r.choices[0].message.content.strip()
-                new_url = f"https://image.pollinations.ai/prompt/{urllib.parse.quote(new_desc)}?width=768&height=768&nologo=true&model=flux"
+                new_url = f"https://image.pollinations.ai/prompt/{urllib.parse.quote(new_desc)}?width=768&height=768&nologo=true&model=flux&negative=deformity,extra%20fingers,blurry,low%20quality"
                 entry["images"][idx] = {"url": new_url, "desc": new_desc}
                 cache[chat_id] = entry
 
