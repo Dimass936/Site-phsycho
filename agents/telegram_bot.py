@@ -360,9 +360,9 @@ async def test(update: Update, context: ContextTypes.DEFAULT_TYPE):
     image_urls = []
     for i in range(3):
         img_prompt = (
-            f"warm minimalist vector illustration, psychology theme: {post[:200]}. "
-            f"soft beige cream pastel colors, scandinavian flat design style. "
-            f"NO people NO faces NO photos. Abstract shapes, calm atmosphere. variant {i + 1}"
+            f"cute kawaii animals illustration, psychology comfort theme: {post[:200]}. "
+            f"bunnies, cats, bears in warm soft beige pastel colors, cozy atmosphere. "
+            f"watercolor style, childrens book illustration, gentle and calming. variant {i + 1}"
         )
         img_r = client.chat.completions.create(
             model="deepseek-chat",
