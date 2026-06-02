@@ -359,7 +359,12 @@ async def test(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     image_urls = []
     for i in range(3):
-        img_prompt = f"Опиши изображение для поста: {post[:200]}. Вариант {i + 1}. Минимализм, пастельные тона, без лиц, уютная атмосфера. Кратко на английском."
+        img_prompt = (
+            f"minimalist abstract illustration for psychology post: {post[:200]}. "
+            f"soft pastel colors beige sage-blue calm atmosphere. "
+            f"NO people NO faces NO hands NO text. Clean simple composition. "
+            f"style: flat vector illustration scandinavian design. variant {i + 1}"
+        )
         img_r = client.chat.completions.create(
             model="deepseek-chat",
             messages=[
@@ -373,7 +378,7 @@ async def test(update: Update, context: ContextTypes.DEFAULT_TYPE):
             max_tokens=150,
         )
         img_desc = img_r.choices[0].message.content.strip()
-        img_url = f"https://image.pollinations.ai/prompt/{urllib.parse.quote(img_desc)}?width=512&height=512&nologo=true"
+        img_url = f"https://image.pollinations.ai/prompt/{urllib.parse.quote(img_desc)}?width=768&height=768&nologo=true&model=flux"
         image_urls.append({"url": img_url, "desc": img_desc})
 
     # Сохраняем в кеш для /edit и /ok
@@ -886,7 +891,7 @@ def main():
                 import urllib.parse
 
                 new_desc = img_r.choices[0].message.content.strip()
-                new_url = f"https://image.pollinations.ai/prompt/{urllib.parse.quote(new_desc)}?width=512&height=512&nologo=true"
+                new_url = f"https://image.pollinations.ai/prompt/{urllib.parse.quote(new_desc)}?width=768&height=768&nologo=true&model=flux"
                 entry["images"][idx] = {"url": new_url, "desc": new_desc}
                 cache[chat_id] = entry
 
