@@ -390,9 +390,17 @@ async def test(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 ]
             ]
         )
-        await update.message.reply_photo(
-            photo=img["url"], caption=f"🖼️ Вариант {i + 1}", reply_markup=kb
-        )
+        try:
+            await update.message.reply_photo(
+                photo=img["url"],
+                caption=f"🖼️ Вариант {i + 1}",
+                reply_markup=kb,
+                read_timeout=20,
+            )
+        except Exception:
+            await update.message.reply_text(
+                f"🖼️ Вариант {i + 1}: {img['url']}", reply_markup=kb
+            )
 
     # Отправляем текст с кнопками действий
     action_kb = InlineKeyboardMarkup(
@@ -892,11 +900,17 @@ def main():
                         ]
                     ]
                 )
-                await update.message.reply_photo(
-                    photo=new_url,
-                    caption=f"🔄 Обновлённая картинка (изменено: {edit_prompt})",
-                    reply_markup=kb,
-                )
+                try:
+                    await update.message.reply_photo(
+                        photo=new_url,
+                        caption=f"🔄 Обновлённая картинка (изменено: {edit_prompt})",
+                        reply_markup=kb,
+                        read_timeout=20,
+                    )
+                except Exception:
+                    await update.message.reply_text(
+                        f"🔄 Обновлённая картинка: {new_url}", reply_markup=kb
+                    )
                 return
 
             # Если режим редактирования текста — обновляем пост
