@@ -435,9 +435,28 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         entry["chosen_image"] = idx
         cache[chat_id] = entry
         await query.answer(f"✅ Выбрана картинка {idx + 1}")
-        await query.message.reply_text(
-            f"✅ Картинка {idx + 1} выбрана. Теперь нажмите действие под текстом."
+        kb = InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        "🔄 Изменить картинку", callback_data=f"edit_img_{idx}"
+                    ),
+                    InlineKeyboardButton("✅ Ок, дальше", callback_data="img_ok"),
+                ]
+            ]
         )
+        await query.message.edit_reply_markup(reply_markup=kb)
+
+    elif data.startswith("edit_img_"):
+        idx = int(data.replace("edit_img_", ""))
+        entry["editing_image"] = idx
+        cache[chat_id] = entry
+        await query.message.reply_text(
+            '🎨 Опишите что изменить на картинке (например: "добавь больше синего", "сделай светлее")'
+        )
+
+    elif data == "img_ok":
+        await query.answer("Картинка выбрана. Теперь нажмите действие под текстом.")
 
     elif data == "approve":
         # Публикуем в канал
@@ -833,7 +852,54 @@ def main():
             cache = context.bot_data.get("post_cache", {})
             entry = cache.get(chat_id, {})
 
-            # Если режим редактирования — обновляем пост
+            # Если режим редактирования картинки
+            if entry.get("editing_image") is not None:
+                idx = entry["editing_image"]
+                edit_prompt = msg.text
+                entry["editing_image"] = None
+
+                # Регенерируем картинку с учётом правок
+                from dotenv import load_dotenv
+                from openai import OpenAI
+
+                load_dotenv()
+                client = OpenAI(
+                    api_key=os.getenv("DEEPSEEK_API_KEY"),
+                    base_url="https://api.deepseek.com",
+                )
+                old_desc = entry["images"][idx]["desc"]
+                img_prompt = f"Modify the image: {old_desc}. Change: {edit_prompt}. Same style, pastel tones, no faces. English only."
+                img_r = client.chat.completions.create(
+                    model="deepseek-chat",
+                    messages=[{"role": "user", "content": img_prompt}],
+                    temperature=0.7,
+                    max_tokens=150,
+                )
+                import urllib.parse
+
+                new_desc = img_r.choices[0].message.content.strip()
+                new_url = f"https://image.pollinations.ai/prompt/{urllib.parse.quote(new_desc)}?width=512&height=512&nologo=true"
+                entry["images"][idx] = {"url": new_url, "desc": new_desc}
+                cache[chat_id] = entry
+
+                kb = InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton(
+                                f"✅ Выбрать обновлённую картинку",
+                                callback_data=f"pick_img_{idx}",
+                            ),
+                        ]
+                    ]
+                )
+                await update.message.reply_photo(
+                    photo=new_url,
+                    caption=f"🔄 Обновлённая картинка (изменено: {edit_prompt})",
+                    reply_markup=kb,
+                )
+                return
+
+            # Если режим редактирования текста — обновляем пост
             if entry.get("editing"):
                 entry["post"] = msg.text
                 entry["editing"] = False
