@@ -64,13 +64,14 @@ def mark_posted():
 # ── Импорты телеграм ────────────────────────────────────────────────
 from telegram.ext import (
     Application,
+    CallbackQueryHandler,
     CommandHandler,
     ContextTypes,
     MessageHandler,
     filters,
 )
 
-from telegram import Update
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 
 # ── Проверка доступа ───────────────────────────────────────────────────
 
@@ -261,14 +262,12 @@ async def post(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def test(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Генерирует пробный пост в стиле канала."""
+    """Генерирует пост в стиле канала с 3 вариантами картинок."""
     if not check_access(update):
         await update.message.reply_text("⛔ Access denied")
         return
 
     text = " ".join(context.args) if context.args else ""
-
-    import json
 
     from dotenv import load_dotenv
     from openai import OpenAI
@@ -277,7 +276,14 @@ async def test(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(f"🧪 Твой текст:\n\n{text[:2000]}")
         return
 
-    # Без аргументов — генерируем пост в стиле канала
+    chat_id = str(update.effective_chat.id)
+
+    # Проверяем кеш — если уже есть готовый пост, показываем его
+    if "post_cache" not in context.bot_data:
+        context.bot_data["post_cache"] = {}
+    cache = context.bot_data["post_cache"]
+
+    # Генерируем новый пост если нет в кеше или нажали /test
     await update.message.reply_text("✍️ Генерирую пост в стиле канала...")
 
     # Читаем гайд по стилю
@@ -288,6 +294,7 @@ async def test(update: Update, context: ContextTypes.DEFAULT_TYPE):
             style = f.read()
 
     # Выбираем тему
+    import json
     import random
 
     topic_text = (
@@ -316,7 +323,7 @@ async def test(update: Update, context: ContextTypes.DEFAULT_TYPE):
 - Тёплый, доверительный тон
 - Одна конкретная мысль
 - Призыв к взаимодействию в конце
-- ВАЖНО: сегодня {datetime.now().strftime("%A")}. Если сегодня вторник — скажи "в пятницу обсудим..." или "продолжим в пятницу". Если сегодня пятница — скажи "во вторник вернёмся к теме...". Не используй "завтра"."""
+- ВАЖНО: сегодня {datetime.now().strftime("%A")}. Ссылайся на следующий пост в пятницу или вторник."""
 
     r = client.chat.completions.create(
         model="deepseek-chat",
@@ -327,34 +334,125 @@ async def test(update: Update, context: ContextTypes.DEFAULT_TYPE):
         temperature=0.7,
         max_tokens=1500,
     )
-
     post = r.choices[0].message.content or "Не удалось сгенерировать"
 
-    # Генерируем картинку к посту
-    await update.message.reply_text("🎨 Генерирую картинку...")
-    img_prompt = f"Опиши изображение для поста: {post[:300]}. Минимализм, пастельные тона, без лиц, уютная атмосфера. Только описание на английском."
-    img_r = client.chat.completions.create(
-        model="deepseek-chat",
-        messages=[
-            {
-                "role": "system",
-                "content": "Ты — AI-арт-директор. Опиши изображение для поста психолога на английском, кратко.",
-            },
-            {"role": "user", "content": img_prompt},
-        ],
-        temperature=0.5,
-        max_tokens=200,
-    )
+    # Генерируем 3 варианта картинок
+    await update.message.reply_text("🎨 Генерирую 3 варианта картинок...")
     import urllib.parse
 
-    img_desc = img_r.choices[0].message.content.strip()
-    img_url = f"https://image.pollinations.ai/prompt/{urllib.parse.quote(img_desc)}?width=512&height=512&nologo=true"
+    image_urls = []
+    for i in range(3):
+        img_prompt = f"Опиши изображение для поста: {post[:200]}. Вариант {i + 1}. Минимализм, пастельные тона, без лиц, уютная атмосфера. Кратко на английском."
+        img_r = client.chat.completions.create(
+            model="deepseek-chat",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "Ты — AI-арт-директор. Кратко опиши изображение на английском.",
+                },
+                {"role": "user", "content": img_prompt},
+            ],
+            temperature=0.8,
+            max_tokens=150,
+        )
+        img_desc = img_r.choices[0].message.content.strip()
+        img_url = f"https://image.pollinations.ai/prompt/{urllib.parse.quote(img_desc)}?width=512&height=512&nologo=true"
+        image_urls.append({"url": img_url, "desc": img_desc})
 
-    await update.message.reply_photo(
-        photo=img_url,
-        caption=f"🧪 Пост готов! Выберите действие:\n/ok — опубликовать в канал\n/skip — пропустить",
+    # Сохраняем в кеш для /edit и /ok
+    cache[chat_id] = {"post": post, "images": image_urls, "chosen_image": 0}
+
+    # Показываем 3 картинки
+    for i, img in enumerate(image_urls):
+        kb = InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        f"✅ Выбрать картинку {i + 1}", callback_data=f"pick_img_{i}"
+                    ),
+                ]
+            ]
+        )
+        await update.message.reply_photo(
+            photo=img["url"], caption=f"🖼️ Вариант {i + 1}", reply_markup=kb
+        )
+
+    # Отправляем текст с кнопками действий
+    action_kb = InlineKeyboardMarkup(
+        [
+            [
+                InlineKeyboardButton("✅ Опубликовать", callback_data="approve"),
+                InlineKeyboardButton("⏭️ Пропустить", callback_data="skip"),
+                InlineKeyboardButton("✏️ Редактировать", callback_data="edit"),
+            ]
+        ]
     )
-    await update.message.reply_text(post[:4000])
+    await update.message.reply_text(
+        f"📝 Текст поста:\n\n{post[:4000]}", reply_markup=action_kb
+    )
+
+    await update.message.reply_text(
+        "👆 Выберите картинку (нажмите на вариант), затем действие."
+    )
+
+
+# ── Обработчик inline-кнопок ─────────────────────────────────────────
+
+
+async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Обрабатывает нажатия на кнопки: ок, скип, эдит, выбор картинки."""
+    query = update.callback_query
+    data = query.data
+    chat_id = str(query.message.chat_id)
+
+    cache = context.bot_data.get("post_cache", {})
+    entry = cache.get(chat_id, {})
+    post = entry.get("post", "")
+
+    if not post:
+        await query.answer("Нет активного поста. Запустите /test")
+        return
+
+    if data.startswith("pick_img_"):
+        idx = int(data.replace("pick_img_", ""))
+        entry["chosen_image"] = idx
+        cache[chat_id] = entry
+        await query.answer(f"✅ Выбрана картинка {idx + 1}")
+        await query.message.reply_text(
+            f"✅ Картинка {idx + 1} выбрана. Теперь нажмите действие под текстом."
+        )
+
+    elif data == "approve":
+        # Публикуем в канал
+        import requests
+
+        img_idx = entry.get("chosen_image", 0)
+        img_url = entry["images"][img_idx]["url"]
+
+        url = f"https://api.telegram.org/bot{TOKEN}/sendPhoto"
+        payload = {"chat_id": CHANNEL_ID, "photo": img_url, "caption": post[:1024]}
+        r = requests.post(url, json=payload, timeout=15)
+
+        if r.status_code == 200:
+            mark_posted()
+            await query.message.edit_text(f"✅ Опубликовано в канале!\n\n{post[:500]}")
+            cache.pop(chat_id, None)
+        else:
+            await query.answer(f"❌ Ошибка: {r.json()}")
+
+    elif data == "skip":
+        cache.pop(chat_id, None)
+        await query.message.edit_text("⏭️ Пост пропущен.")
+
+    elif data == "edit":
+        entry["editing"] = True
+        cache[chat_id] = entry
+        await query.message.reply_text(
+            "✏️ Отправьте исправленный текст одним сообщением.\n\nТекущий текст:\n\n"
+            + post[:1500]
+        )
+
+    await query.answer()
 
 
 async def post_now(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -706,28 +804,58 @@ def main():
     app.add_handler(CommandHandler("ok", ok_cmd))
     app.add_handler(CommandHandler("skip", skip_cmd))
     app.add_handler(CommandHandler("learn", learn))
+    app.add_handler(CallbackQueryHandler(handle_callback))
 
-    # Сохраняем текстовые сообщения для /learn
+    # Сохраняем текстовые сообщения для /learn и /edit
     async def save_forward(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if not check_access(update):
             return
         msg = update.message
-        if msg and msg.text and len(msg.text.strip()) > 50:
-            import json
+        if msg and msg.text:
+            chat_id = str(update.effective_chat.id)
+            cache = context.bot_data.get("post_cache", {})
+            entry = cache.get(chat_id, {})
 
-            style_file = os.path.join(PROJECT_DIR, "style_examples.json")
-            examples = []
-            if os.path.exists(style_file):
-                with open(style_file) as f:
-                    examples = json.load(f)
-            examples.append({"text": msg.text, "date": datetime.now().isoformat()})
-            if len(examples) > 20:
-                examples = examples[-20:]
-            with open(style_file, "w") as f:
-                json.dump(examples, f)
-            await update.message.reply_text(
-                f"📥 Сохранён. Примеров: {len(examples)}. Перешлите ещё или /learn"
-            )
+            # Если режим редактирования — обновляем пост
+            if entry.get("editing"):
+                entry["post"] = msg.text
+                entry["editing"] = False
+                cache[chat_id] = entry
+                action_kb = InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton(
+                                "✅ Опубликовать", callback_data="approve"
+                            ),
+                            InlineKeyboardButton("⏭️ Пропустить", callback_data="skip"),
+                            InlineKeyboardButton(
+                                "✏️ Редактировать", callback_data="edit"
+                            ),
+                        ]
+                    ]
+                )
+                await update.message.reply_text(
+                    f"✅ Текст обновлён!\n\n{msg.text[:4000]}", reply_markup=action_kb
+                )
+                return
+
+            # Иначе сохраняем как пример стиля
+            if len(msg.text.strip()) > 50:
+                import json
+
+                style_file = os.path.join(PROJECT_DIR, "style_examples.json")
+                examples = []
+                if os.path.exists(style_file):
+                    with open(style_file) as f:
+                        examples = json.load(f)
+                examples.append({"text": msg.text, "date": datetime.now().isoformat()})
+                if len(examples) > 20:
+                    examples = examples[-20:]
+                with open(style_file, "w") as f:
+                    json.dump(examples, f)
+                await update.message.reply_text(
+                    f"📥 Сохранён. Примеров: {len(examples)}."
+                )
 
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, save_forward))
 
