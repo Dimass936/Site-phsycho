@@ -395,7 +395,7 @@ async def test(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 photo=img["url"],
                 caption=f"🖼️ Вариант {i + 1}",
                 reply_markup=kb,
-                read_timeout=20,
+                read_timeout=45,
             )
         except Exception:
             await update.message.reply_text(
@@ -942,7 +942,7 @@ def main():
                             photo=new_url,
                             caption=f"🔄 Обновлённая картинка",
                             reply_markup=kb,
-                            read_timeout=20,
+                            read_timeout=45,
                         )
                     except Exception:
                         await update.message.reply_text(
