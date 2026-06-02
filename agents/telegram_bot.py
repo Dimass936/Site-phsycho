@@ -360,10 +360,10 @@ async def test(update: Update, context: ContextTypes.DEFAULT_TYPE):
     image_urls = []
     for i in range(3):
         img_prompt = (
-            f"minimalist abstract illustration for psychology post: {post[:200]}. "
-            f"soft pastel colors beige sage-blue calm atmosphere. "
-            f"NO people NO faces NO hands NO text. Clean simple composition. "
-            f"style: flat vector illustration scandinavian design. variant {i + 1}"
+            f"professional high quality photorealistic image for psychology post: {post[:200]}. "
+            f"warm pastel colors beige cream tones. natural lighting. "
+            f"NO deformities NO extra fingers NO distorted faces. "
+            f"clean sharp image, aesthetic, calm atmosphere. variant {i + 1}"
         )
         img_r = client.chat.completions.create(
             model="deepseek-chat",
@@ -881,7 +881,7 @@ def main():
                     base_url="https://api.deepseek.com",
                 )
                 old_desc = entry["images"][idx]["desc"]
-                img_prompt = f"Modify the image: {old_desc}. Change: {edit_prompt}. Same style, pastel tones, no faces. English only."
+                img_prompt = f"Modify image: {old_desc}. Change: {edit_prompt}. Professional photorealistic quality, warm pastel tones, NO deformities NO extra fingers. English only."
                 img_r = client.chat.completions.create(
                     model="deepseek-chat",
                     messages=[{"role": "user", "content": img_prompt}],
