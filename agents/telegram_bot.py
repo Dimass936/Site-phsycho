@@ -491,7 +491,11 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if entry.get("own_photo_id"):
             # Отправляем свою картинку
             url = f"https://api.telegram.org/bot{TOKEN}/sendPhoto"
-            payload = {"chat_id": CHANNEL_ID, "photo": entry["own_photo_id"], "caption": post[:1024]}
+            payload = {
+                "chat_id": CHANNEL_ID,
+                "photo": entry["own_photo_id"],
+                "caption": post[:1024],
+            }
         else:
             img_idx = entry.get("chosen_image", 0)
             img_url = entry["images"][img_idx]["url"]
@@ -889,104 +893,108 @@ def main():
                 photo = msg.photo[-1]
                 entry["own_photo_id"] = photo.file_id
                 cache[chat_id] = entry
-                await update.message.reply_text("✅ Ваша картинка сохранена! Теперь нажмите действие под текстом.")
+                await update.message.reply_text(
+                    "✅ Ваша картинка сохранена! Теперь нажмите действие под текстом."
+                )
                 return
 
             if msg.text:
+                # Если режим редактирования картинки
+                if entry.get("editing_image") is not None:
+                    idx = entry["editing_image"]
+                    edit_prompt = msg.text
+                    entry["editing_image"] = None
 
-            # Если режим редактирования картинки
-            if entry.get("editing_image") is not None:
-                idx = entry["editing_image"]
-                edit_prompt = msg.text
-                entry["editing_image"] = None
+                    from dotenv import load_dotenv
+                    from openai import OpenAI
 
-                # Регенерируем картинку с учётом правок
-                from dotenv import load_dotenv
-                from openai import OpenAI
-
-                load_dotenv()
-                client = OpenAI(
-                    api_key=os.getenv("DEEPSEEK_API_KEY"),
-                    base_url="https://api.deepseek.com",
-                )
-                old_desc = entry["images"][idx]["desc"]
-                img_prompt = f"Modify image: {old_desc}. Change: {edit_prompt}. Professional photorealistic quality, warm pastel tones, NO deformities NO extra fingers. English only."
-                img_r = client.chat.completions.create(
-                    model="deepseek-chat",
-                    messages=[{"role": "user", "content": img_prompt}],
-                    temperature=0.7,
-                    max_tokens=150,
-                )
-                import urllib.parse
-
-                new_desc = img_r.choices[0].message.content.strip()
-                new_url = f"https://image.pollinations.ai/prompt/{urllib.parse.quote(new_desc)}?width=768&height=768&nologo=true&model=flux&negative=deformity,extra%20fingers,blurry,low%20quality"
-                entry["images"][idx] = {"url": new_url, "desc": new_desc}
-                cache[chat_id] = entry
-
-                kb = InlineKeyboardMarkup(
-                    [
-                        [
-                            InlineKeyboardButton(
-                                f"✅ Выбрать обновлённую картинку",
-                                callback_data=f"pick_img_{idx}",
-                            ),
-                        ]
-                    ]
-                )
-                try:
-                    await update.message.reply_photo(
-                        photo=new_url,
-                        caption=f"🔄 Обновлённая картинка (изменено: {edit_prompt})",
-                        reply_markup=kb,
-                        read_timeout=20,
+                    load_dotenv()
+                    client = OpenAI(
+                        api_key=os.getenv("DEEPSEEK_API_KEY"),
+                        base_url="https://api.deepseek.com",
                     )
-                except Exception:
+                    old_desc = entry["images"][idx]["desc"]
+                    img_prompt = f"Modify image: {old_desc}. Change: {edit_prompt}. English only."
+                    img_r = client.chat.completions.create(
+                        model="deepseek-chat",
+                        messages=[{"role": "user", "content": img_prompt}],
+                        temperature=0.7,
+                        max_tokens=150,
+                    )
+                    import urllib.parse
+
+                    new_desc = img_r.choices[0].message.content.strip()
+                    new_url = f"https://image.pollinations.ai/prompt/{urllib.parse.quote(new_desc)}?width=768&height=768&nologo=true&model=flux&negative=deformity,extra%20fingers,blurry,low%20quality"
+                    entry["images"][idx] = {"url": new_url, "desc": new_desc}
+                    cache[chat_id] = entry
+                    kb = InlineKeyboardMarkup(
+                        [
+                            [
+                                InlineKeyboardButton(
+                                    "✅ Выбрать обновлённую картинку",
+                                    callback_data=f"pick_img_{idx}",
+                                ),
+                            ]
+                        ]
+                    )
+                    try:
+                        await update.message.reply_photo(
+                            photo=new_url,
+                            caption=f"🔄 Обновлённая картинка",
+                            reply_markup=kb,
+                            read_timeout=20,
+                        )
+                    except Exception:
+                        await update.message.reply_text(
+                            f"🔄 Обновлённая картинка: {new_url}", reply_markup=kb
+                        )
+                    return
+
+                # Если режим редактирования текста
+                if entry.get("editing"):
+                    entry["post"] = msg.text
+                    entry["editing"] = False
+                    cache[chat_id] = entry
+                    action_kb = InlineKeyboardMarkup(
+                        [
+                            [
+                                InlineKeyboardButton(
+                                    "✅ Опубликовать", callback_data="approve"
+                                ),
+                                InlineKeyboardButton(
+                                    "⏭️ Пропустить", callback_data="skip"
+                                ),
+                                InlineKeyboardButton(
+                                    "✏️ Редактировать", callback_data="edit"
+                                ),
+                            ]
+                        ]
+                    )
                     await update.message.reply_text(
-                        f"🔄 Обновлённая картинка: {new_url}", reply_markup=kb
+                        f"✅ Текст обновлён!\n\n{msg.text[:4000]}",
+                        reply_markup=action_kb,
                     )
-                return
+                    return
 
-            # Если режим редактирования текста — обновляем пост
-            if entry.get("editing"):
-                entry["post"] = msg.text
-                entry["editing"] = False
-                cache[chat_id] = entry
-                action_kb = InlineKeyboardMarkup(
-                    [
-                        [
-                            InlineKeyboardButton(
-                                "✅ Опубликовать", callback_data="approve"
-                            ),
-                            InlineKeyboardButton("⏭️ Пропустить", callback_data="skip"),
-                            InlineKeyboardButton(
-                                "✏️ Редактировать", callback_data="edit"
-                            ),
-                        ]
-                    ]
-                )
-                await update.message.reply_text(
-                    f"✅ Текст обновлён!\n\n{msg.text[:4000]}", reply_markup=action_kb
-                )
-                return
+                # Сохраняем как пример стиля
+                if len(msg.text.strip()) > 50:
+                    import json
 
-            # Иначе сохраняем как пример стиля
-            if len(msg.text.strip()) > 50:
-                import json
-
-                style_file = os.path.join(PROJECT_DIR, "style_examples.json")
-                examples = []
-                if os.path.exists(style_file):
-                    with open(style_file) as f:
-                        examples = json.load(f)
-                examples.append({"text": msg.text, "date": datetime.now().isoformat()})
-                if len(examples) > 20:
-                    examples = examples[-20:]
-                with open(style_file, "w") as f:
-                    json.dump(examples, f)
-                await update.message.reply_text(
-                    f"📥 Сохранён. Примеров: {len(examples)}."
-                )
+                    style_file = os.path.join(PROJECT_DIR, "style_examples.json")
+                    examples = []
+                    if os.path.exists(style_file):
+                        with open(style_file) as f:
+                            examples = json.load(f)
+                    examples.append(
+                        {"text": msg.text, "date": datetime.now().isoformat()}
+                    )
+                    if len(examples) > 20:
+                        examples = examples[-20:]
+                    with open(style_file, "w") as f:
+                        json.dump(examples, f)
+                    await update.message.reply_text(
+                        f"📥 Сохранён. Примеров: {len(examples)}."
+                    )
 
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, save_forward))
 
